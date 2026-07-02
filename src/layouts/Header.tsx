@@ -9,10 +9,10 @@ const Header = () => {
         <div className={styles.left}>
           <div className={styles.searchWrapper}>
             <HiOutlineMagnifyingGlass className={styles.searchIcon} size={20} />
-            <input 
-              type="text" 
-              placeholder="Search customers, companies, domains..." 
-              className={styles.searchInput} 
+            <input
+              type="text"
+              placeholder="Search customers, companies, domains..."
+              className={styles.searchInput}
             />
           </div>
         </div>
@@ -43,6 +43,10 @@ const Header = () => {
           <button className={styles.bellBtn}>
             <HiOutlineBell size={24} color="#6b7280" />
             <span className={styles.notificationDot}></span>
+          </button>
+          
+          <button className={styles.avatarBtn}>
+            MH
           </button>
         </div>
       </div>

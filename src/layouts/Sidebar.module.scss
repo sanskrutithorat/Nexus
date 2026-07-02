@@ -94,7 +94,7 @@
 
 .link {
   text-decoration: none;
-  color: $body-color;
+  color: #64748B;
   padding: 12px;
   border-radius: 12px;
   transition: 0.2s ease;
@@ -104,9 +104,18 @@
   white-space: nowrap;
   overflow: hidden;
 
+  svg {
+    color: #64748B;
+    transition: 0.2s ease;
+  }
+
   &:hover {
-    background: $light-bg;
-    color: $primary;
+    // background: rgba(#4F46E5, 0.08);
+    color: #4F46E5;
+
+    svg {
+      color: #4F46E5;
+    }
   }
 }
 
@@ -115,15 +124,22 @@
 }
 
 .linkText {
-  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .active {
-  background: $light-bg;
-  color: $primary;
+  background: rgba(#4F46E5, 0.08);
+  color: #4F46E5;
+
+  svg {
+    color: #4F46E5;
+  }
 
   .linkText {
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 

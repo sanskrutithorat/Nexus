@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useUIStore } from "@/store/uiStore";
 import Logout from "@/features/auth/Logout";
-import { 
-  HiOutlineHome, 
-  HiOutlineShoppingBag, 
-  HiOutlineUser, 
+import {
+  HiOutlineRectangleGroup,
+  HiOutlineUser,
   HiOutlineCog6Tooth,
   HiOutlineUsers,
   HiOutlineClipboardDocumentList,
@@ -36,7 +35,7 @@ const Sidebar = () => {
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
-          <HiOutlineHome size={24} className={styles.icon} />
+          <HiOutlineRectangleGroup size={24} className={styles.icon} />
           <span className={styles.linkText}>Dashboard</span>
         </NavLink>
         <NavLink
@@ -48,7 +47,7 @@ const Sidebar = () => {
           <HiOutlineUsers size={24} className={styles.icon} />
           <span className={styles.linkText}>Customer</span>
         </NavLink>
-        
+
         <NavLink
           to="/task"
           className={({ isActive }) =>
