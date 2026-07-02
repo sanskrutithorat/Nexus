@@ -1,0 +1,28 @@
+.animated {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.fadeUp {
+  transform: translateY(40px);
+}
+
+.fadeLeft {
+  transform: translateX(-40px);
+}
+
+.fadeRight {
+  transform: translateX(40px);
+}
+
+.scale {
+  transform: scale(0.92);
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}

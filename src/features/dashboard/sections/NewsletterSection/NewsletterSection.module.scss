@@ -1,0 +1,75 @@
+@use "@/styles/abstracts/variables" as *;
+
+.section {
+  padding: 4rem 0 5rem;
+}
+
+.box {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $white;
+  border-radius: 28px;
+  border: 1px solid $border-color;
+  box-shadow: 0 12px 40px rgba(27, 67, 50, 0.06);
+}
+
+.icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.box h2 {
+  font-family: $font-family-display;
+  font-weight: 700;
+  color: $secondary;
+  margin-bottom: 0.75rem;
+}
+
+.box p {
+  color: $muted-color;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+}
+
+.form {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+
+  input {
+    flex: 1;
+  }
+
+  button {
+    white-space: nowrap;
+    padding: 0 28px !important;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 767px) {
+  .box {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .box h2 {
+    font-size: 1.5rem;
+  }
+
+  .form {
+    flex-direction: column;
+  }
+}

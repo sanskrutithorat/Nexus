@@ -1,0 +1,15 @@
+@use "./abstracts/variables" as *;
+@use "./base/buttons";
+@use "./custom-bootstrap";
+@use "./base/global";
+@use "./base/utilities";
+@use "./base/typography";
+
+#root {
+  font-family: $font-family;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family;
+}

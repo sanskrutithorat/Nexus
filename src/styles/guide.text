@@ -1,0 +1,94 @@
+Purpose: Global styling foundation for:
+
+themes
+variables
+typography
+bootstrap overrides
+shared utilities
+
+Do NOT use this folder for feature/component-specific styles.
+
+Structure
+styles/
+│
+├── abstracts/
+├── base/
+├── themes/
+├── vendors/
+└── globals.scss
+
+abstracts/
+Store
+variables
+mixins
+functions
+breakpoints
+Example
+$spacing-md: 16px;
+
+@mixin flex-center {
+  display: flex;
+}
+
+Do NOT Store
+component styles
+feature styles
+
+base/
+Store
+reset styles
+typography
+global styles
+utility classes
+Example
+body {
+  font-family: "Inter", sans-serif;
+}
+
+Do NOT Store
+.lesson-card {}
+
+themes/
+Store
+light theme
+dark theme
+CSS variables
+Example
+:root {
+  --primary-color: #2563eb;
+}
+
+Rule : Use CSS variables for colors/themes.
+
+vendors/
+Store
+bootstrap overrides
+third-party overrides
+Example
+$primary: #2563eb;
+📄 globals.scss
+
+Purpose : Main global stylesheet entry.
+
+Imported once in : main.tsx
+
+Component Styling Rule
+Always Use SCSS Modules
+Example
+LessonCard.module.scss
+.card {
+  background: var(--primary-color);
+}
+
+Never Store In styles/
+feature-specific styles
+page-specific styles
+business/domain styles
+
+BAD:
+.quiz-page {}
+.lesson-wrapper {}
+
+Team Rules
+1. Do NOT dump everything into globals.scss
+2. Use CSS variables for colors/themes

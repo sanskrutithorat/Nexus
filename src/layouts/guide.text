@@ -1,0 +1,43 @@
+Purpose : Contains shared application layouts/wrappers.
+
+Layouts define:
+common page structure
+navigation
+sidebar
+headers
+footers
+shared containers
+
+Used with React Router nested routing.
+
+Structure
+layouts/
+│
+├── MainLayout/
+├── AuthLayout/
+├── DashboardLayout/
+└── EmptyLayout/
+
+Store Here
+Shared Layout Wrappers
+Examples
+Main app layout
+Auth pages layout
+Dashboard layout
+Minimal/blank layout
+
+Example Responsibilities
+MainLayout
+Navbar
+Footer
+Shared app shell
+DashboardLayout
+Sidebar
+Header
+Content wrapper
+
+Team Rules
+1.Layouts are structural wrappers only.
+2.Use React Router Outlet.
+3.Keep layouts reusable.
+4.Use SCSS Modules for layout styling.

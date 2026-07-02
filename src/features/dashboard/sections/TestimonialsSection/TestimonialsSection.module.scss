@@ -1,0 +1,112 @@
+@use "@/styles/abstracts/variables" as *;
+
+.section {
+  padding: 5rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h2 {
+    font-family: $font-family-display;
+    font-weight: 700;
+    color: $secondary;
+    margin: 0;
+  }
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary;
+  margin-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: $card-border-radius;
+  background: $white;
+  border: 1px solid $border-color;
+  height: 100%;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(27, 67, 50, 0.08);
+  }
+
+  p {
+    color: $body-color;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+}
+
+.stars {
+  color: $accent;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  h6 {
+    margin: 0;
+    font-weight: 600;
+    color: $secondary;
+  }
+
+  small {
+    color: $muted-color;
+  }
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $primary-gradient;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    > :last-child {
+      grid-column: span 2;
+      max-width: 50%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,100 @@
+@use "@/styles/abstracts/variables" as *;
+
+.categorySection {
+  padding: 4rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-family: $font-family-display;
+    font-weight: 700;
+    color: $secondary;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: $muted-color;
+    margin: 0;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary;
+  margin-bottom: 0.5rem;
+}
+
+.categoryList {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.categoryCard {
+  background: $white;
+  border-radius: 16px;
+  padding: 1.75rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid $border-color;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba(45, 106, 79, 0.45);
+    box-shadow: 0 12px 32px rgba(45, 106, 79, 0.15);
+
+    .icon {
+      transform: scale(1.15);
+    }
+  }
+
+  h6 {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: $body-color;
+    font-size: 0.9rem;
+  }
+}
+
+.icon {
+  font-size: 2.25rem;
+  transition: transform 0.35s ease;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .categoryList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .categorySection {
+    padding: 3rem 0;
+  }
+
+  .categoryList {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .categoryCard {
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+}

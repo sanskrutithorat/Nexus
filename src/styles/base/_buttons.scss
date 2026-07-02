@@ -1,0 +1,11 @@
+@use "../abstracts/variables" as *;
+
+.btn-primary {
+  background: $primary-gradient !important;
+  color: white !important;
+  border: none !important;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

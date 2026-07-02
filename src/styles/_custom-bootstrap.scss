@@ -1,0 +1,14 @@
+// Load Bootstrap's internal functions
+@import "bootstrap/scss/functions";
+
+// Load your custom overrides file ($primary: red;)
+@import "./abstracts/variables";
+
+// Load the remaining core framework files in order
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// compile the complete styling architecture
+@import "bootstrap/scss/bootstrap";

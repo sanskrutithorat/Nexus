@@ -1,0 +1,269 @@
+@use "@/styles/abstracts/variables" as *;
+
+.hero {
+  position: relative;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  background: $hero-gradient;
+  overflow: hidden;
+  border-radius: 0 0 32px 32px;
+}
+
+.glowOrb,
+.glowOrb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.glowOrb {
+  width: 400px;
+  height: 400px;
+  background: rgba(45, 106, 79, 0.18);
+  top: -100px;
+  right: 10%;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.glowOrb2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(254, 249, 195, 0.7);
+  bottom: -50px;
+  left: 5%;
+  animation: pulse 8s ease-in-out infinite reverse;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+
+  h1 {
+    font-family: $font-family-display;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    line-height: 1.15;
+    color: $secondary;
+  }
+}
+
+.highlight {
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(45, 106, 79, 0.12);
+  color: $primary;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content p {
+  font-size: 1.1rem;
+  color: $muted-color;
+  margin-bottom: 2rem;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.ctaBtn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px !important;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45, 106, 79, 0.35);
+  }
+}
+
+.outlineBtn {
+  padding: 12px 28px !important;
+  font-weight: 600;
+  border-color: $primary !important;
+  color: $primary !important;
+
+  &:hover {
+    background: rgba(45, 106, 79, 0.08) !important;
+  }
+}
+
+.trustBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  span {
+    font-size: 0.85rem;
+    color: $body-color;
+    font-weight: 500;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid $white;
+  box-shadow: 0 24px 64px rgba(27, 67, 50, 0.18);
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.floatingCard {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: $white;
+  padding: 14px 20px;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(27, 67, 50, 0.12);
+  animation: float 4s ease-in-out infinite 1s;
+
+  strong {
+    display: block;
+    font-size: 1.25rem;
+    color: $accent;
+    line-height: 1.2;
+  }
+
+  small {
+    color: $muted-color;
+    font-size: 0.8rem;
+  }
+}
+
+.cardIcon {
+  font-size: 1.75rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    min-height: 520px;
+    padding: 3rem 0;
+  }
+
+  .content h1 {
+    font-size: 2.8rem;
+  }
+
+  .heroImage {
+    max-width: 340px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .hero {
+    min-height: auto;
+    padding: 3rem 0 4rem;
+    border-radius: 0 0 24px 24px;
+    text-align: center;
+  }
+
+  .content h1 {
+    font-size: 2.2rem;
+  }
+
+  .content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .trustBadges {
+    justify-content: center;
+  }
+
+  .imageWrapper {
+    margin-top: 2.5rem;
+  }
+
+  .heroImage {
+    max-width: 280px;
+  }
+
+  .floatingCard {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+  }
+}

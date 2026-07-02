@@ -1,0 +1,107 @@
+Store Folder Guide
+Purpose : Global Zustand stores for:
+
+shared frontend state
+UI state
+app-wide session state
+
+Do NOT use store for API/server data.
+
+Use TanStack Query for backend/server state.
+
+Structure
+store/
+│
+├── theme.store.ts
+├── app.store.ts
+└── notification.store.ts
+
+Store ONLY Global Shared State
+
+Examples
+theme
+sidebar state
+modal state
+current session state
+notification/toast state
+selected learning mode
+
+Do NOT Store
+API responses
+lesson lists
+quizzes from backend
+leaderboard data
+fetched user data
+
+These belong in React Query.
+
+Good Example
+theme: "light"
+sidebarOpen: true
+
+Bad Example
+lessons: []
+quizResults: []
+
+Feature-Specific Stores
+
+Feature state should stay INSIDE features.
+
+Example
+features/
+└── lesson/
+    └── store/
+        └── lesson.store.ts
+
+Global store/
+Only for app-wide shared state.
+
+Store Rules
+Zustand → Frontend/UI State
+Use for:
+UI state
+session state
+temporary frontend state
+
+React Query → Backend/API State
+Use for:
+API data
+caching
+fetching
+mutations
+
+Store Naming Convention
+theme.store.ts
+auth.store.ts
+app.store.ts
+
+Store Hook Naming
+useThemeStore
+useAuthStore
+useAppStore
+
+Example Structure
+type ThemeStore = {
+  theme: "light" | "dark";
+
+  setTheme: (
+    theme: "light" | "dark"
+  ) => void;
+};
+
+Team Rules
+1. Do NOT duplicate API data in Zustand.
+
+2. Keep stores small and focused.
+
+3. Feature-specific state belongs inside feature folders.
+
+4. Use selectors to avoid unnecessary re-renders.
+
+GOOD:
+const theme = useThemeStore(
+  (state) => state.theme
+);
+
+BAD:
+const store = useThemeStore();

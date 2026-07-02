@@ -1,0 +1,45 @@
+@use "@/styles/abstracts/variables" as *;
+
+.layout {
+  min-height: 100vh;
+
+  background: #f0fdf4;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.main {
+  height: calc(100vh - 72px);
+
+  overflow-y: auto;
+
+  padding: 15px;
+
+  margin-top: 72px;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.container {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+
+    margin-top: 64px;
+
+    height: calc(100vh - 64px);
+  }
+}
