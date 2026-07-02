@@ -163,7 +163,7 @@ const Customer = () => {
                 const name = row.original.name;
                 const id = row.original.id;
                 const initials = name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
-                
+
                 return (
                     <div className={styles.nameContainer}>
                         <div className={styles.avatar}>
@@ -193,7 +193,7 @@ const Customer = () => {
             header: "PHONE NUMBER",
             cell: ({ getValue }) => {
                 const val = getValue() as string;
-                return `+1 (555) ${val.slice(3,6)}-${val.slice(6,10)}`;
+                return `+1 (555) ${val.slice(3, 6)}-${val.slice(6, 10)}`;
             }
         },
         {
@@ -222,7 +222,10 @@ const Customer = () => {
     return (
         <>
             <h1 className={styles.heading}>Customer</h1>
-            <CommonTable data={data} columns={columns} />
+            <div className={styles.CustomerTableWrapper}>
+
+                <CommonTable data={data} columns={columns} />
+            </div>
         </>
     );
 };

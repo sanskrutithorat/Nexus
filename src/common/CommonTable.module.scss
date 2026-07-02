@@ -2,8 +2,8 @@
 
 .tableContainer {
   width: 100%;
-  overflow: hidden;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: inherit;
   background: $white;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
