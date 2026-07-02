@@ -1,45 +1,49 @@
-// import { HiOutlineBars3 } from "react-icons/hi2";
-import devyaniFarmlogo from "@/assets/logo/devyaniFarmlogo.png"
-import { useUIStore } from "@/store/uiStore";
-
+import { HiOutlineMagnifyingGlass, HiOutlineBell } from "react-icons/hi2";
 import styles from "./Header.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const toggleSidebar = useUIStore((s) => s.toggleSidebar);
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* LEFT */}
+        {/* LEFT: Search */}
         <div className={styles.left}>
-          <button className={styles.logoBtn} onClick={toggleSidebar}>
-            {/* <HiOutlineBars3 /> */}
-            <img
-              src={devyaniFarmlogo}
-              alt="Devyani Farms"
-              className={styles.logoImage}
+          <div className={styles.searchWrapper}>
+            <HiOutlineMagnifyingGlass className={styles.searchIcon} size={20} />
+            <input 
+              type="text" 
+              placeholder="Search customers, companies, domains..." 
+              className={styles.searchInput} 
             />
-          </button>
-
-          <div className={styles.logo}>Devyani Farms</div>
+          </div>
         </div>
-
-        {/* CENTER */}
-        {/* <div className={styles.center}>
-          <input type="text" placeholder="Search..." className={styles.search} />
-        </div> */}
 
         {/* RIGHT */}
         <div className={styles.right}>
-          <button className={styles.actionBtn} onClick={() => navigate("/dashboard")}>Dashboard</button>
-          <button className={styles.actionBtn} onClick={() => navigate("/products")}>Products</button>
+          {/* Role Preview */}
+          <div className={styles.rolePreview}>
+            <span className={styles.roleLabel}>Role Preview:</span>
+            <button className={`${styles.roleBtn} ${styles.roleActive}`}>
+              👑 Admin
+            </button>
+            <button className={styles.roleBtn}>
+              🏆 Employee
+            </button>
+            <button className={styles.roleBtn}>
+              👁️ Viewer
+            </button>
+          </div>
 
+          {/* Admin Badge */}
+          <div className={styles.adminBadge}>
+            <span className={styles.dot}></span>
+            🔥 Admin Role
+          </div>
 
-          <button className={styles.actionBtn} onClick={() => navigate("/setting")}>Setting</button>
-
-          <div className={styles.avatar} onClick={() => navigate("/profile")}>A</div>
+          {/* Bell Icon */}
+          <button className={styles.bellBtn}>
+            <HiOutlineBell size={24} color="#6b7280" />
+            <span className={styles.notificationDot}></span>
+          </button>
         </div>
       </div>
     </header>

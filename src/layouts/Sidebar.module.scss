@@ -1,105 +1,157 @@
 @use "@/styles/abstracts/variables" as *;
 
-.overlay {
-position: fixed;
-inset: 0;
-background: rgba(0, 0, 0, 0.4);
-z-index: 1200;
-
-opacity: 0;
-pointer-events: none;
-
-transition: 0.3s ease;
-}
-
-.showOverlay {
-opacity: 1;
-pointer-events: all;
-}
-
 .sidebar {
-position: fixed;
-top: 0;
-left: 0;
+  flex-shrink: 0;
+  height: 100vh;
+  background: $white;
+  z-index: 1300;
+  border-right: 1px solid $border-color;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0; // Ensures sidebar stays in view if layout scrolls, though layout is flex 100vh
 
-width: 280px;
-max-width: 85vw;
-height: 100vh;
-
-background: $white;
-
-z-index: 1300;
-
-border-right: 1px solid $border-color;
-
-transform: translateX(-100%);
-transition: transform 0.3s ease;
-
-padding: 24px;
+  &:hover {
+    width: 280px;
+  }
 }
 
 .showSidebar {
-transform: translateX(0);
+  width: 280px;
+}
+
+.closedSidebar {
+  width: 80px;
+
+  .logoTextContainer,
+  .linkText {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+
+    .logoTextContainer,
+    .linkText {
+      opacity: 1;
+      pointer-events: auto;
+      transition-delay: 0.1s;
+    }
+  }
 }
 
 .top {
-margin-bottom: 32px;
-
-h2 {
-font-size: 20px;
-color: $secondary;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  // margin-bottom: 24px;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  gap: 12px;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+.logoTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  h2 {
+    font-size: 20px;
+    color: $secondary;
+    margin: 0;
+    line-height: 1.2;
+  }
+}
+
+.logoSubText {
+  font-size: 12px;
+  color: $muted-color;
+}
+
+.logoImage {
+  width: 32px;
+  height: 50px;
+  margin-top: 18px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .nav {
-display: flex;
-flex-direction: column;
-gap: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  padding: 0 16px;
 }
 
 .link {
-text-decoration: none;
-color: $body-color;
+  text-decoration: none;
+  color: $body-color;
+  padding: 12px;
+  border-radius: 12px;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  overflow: hidden;
 
-padding: 14px 16px;
-border-radius: 12px;
-
-transition: 0.2s ease;
-
-&:hover {
-background: $light-bg;
-color: $primary;
+  &:hover {
+    background: $light-bg;
+    color: $primary;
+  }
 }
+
+.icon {
+  flex-shrink: 0;
+}
+
+.linkText {
+  font-weight: 500;
 }
 
 .active {
-background: $light-bg;
-color: $primary;
-font-weight: 600;
-}
+  background: $light-bg;
+  color: $primary;
 
+  .linkText {
+    font-weight: 600;
+  }
+}
 
 .logoutSection {
   margin-top: auto;
   padding-top: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .logoutBtn {
   width: 100%;
-
   border: none;
   border-radius: 12px;
-
-  padding: 14px 16px;
-
+  padding: 12px;
   background: rgba($danger, 0.08);
   color: $danger;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  overflow: hidden;
 
   &:hover {
     background: rgba($danger, 0.15);

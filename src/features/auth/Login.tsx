@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Nexuslogo from "@/assets/logo/Background.svg";
 
 import { useLogin } from "../../hooks/useAuth";
 
@@ -39,17 +40,16 @@ const Login = () => {
       <div className={styles.brandingSection}>
         <div className={styles.brandingContent}>
           <div className={styles.logo}>
-            Datta Ghee
+            <img src={Nexuslogo} alt="Nexus Logo" className={styles.logoImage} />
+            <span>NexusCRM</span>
           </div>
 
           <h1 className={styles.heading}>
-            Learn Smarter with Datta
+            Streamline your customer relationships.
           </h1>
 
           <p className={styles.subtext}>
-            Personalized learning powered by
-            modern Datta tools and interactive
-            experiences.
+            The intelligent platform for managing contacts, tracking tasks, and driving your business growth forward with ease.
           </p>
         </div>
       </div>
@@ -58,10 +58,10 @@ const Login = () => {
       <div className={styles.formSection}>
         <div className={styles.loginCard}>
           <div className={styles.top}>
-            <h2>Welcome Back Datta!</h2>
+            <h2>Welcome Back!</h2>
 
             <p>
-              Login to continue your journey.
+              Please enter your details to sign in.
             </p>
           </div>
 

@@ -1,62 +1,61 @@
-// Farm palette — green & yellow
-$primary: #2d6a4f;
-$secondary: #1b4332;
-$accent: #f4c430;
-$yellow: #fbbf24;
+// NexusCRM Theme Palette - Indigo & Gray
+$primary: #4f46e5; // Indigo 600
+$secondary: #4338ca; // Indigo 700
+$accent: #6366f1; // Indigo 500
+$yellow: #f59e0b;
 
-$success: #22c55e;
+$success: #10b981;
 $warning: #f59e0b;
 $danger: #ef4444;
 
 $white: #ffffff;
-$black: #0f1f17;
+$black: #111827; // Gray 900
 
-$body-color: #1e3a2f;
-$muted-color: #5c7a6a;
+$body-color: #374151; // Gray 700
+$muted-color: #6b7280; // Gray 500
 
-$light-bg: #f0fdf4;
-$cream: #fef9c3;
-$border-color: #bbf7d0;
+$light-bg: #f9fafb; // Gray 50
+$cream: #f3f4f6; // Gray 100
+$border-color: #e2e8f0; // Slate 200
 
 $primary-gradient: linear-gradient(
   135deg,
-  #2d6a4f 0%,
-  #52b788 45%,
-  #f4c430 100%
+  #4f46e5 0%,
+  #6366f1 100%
 );
 
 $hero-gradient: linear-gradient(
   135deg,
-  #f0fdf4 0%,
-  #fef9c3 45%,
-  #ecfdf5 100%
+  #eef2ff 0%,
+  #e0e7ff 45%,
+  #f3f4f6 100%
 );
 
 // Typography
-$font-family: "Rubik", sans-serif;
-$font-family-display: "Playfair Display", Georgia, serif;
+$font-family: "Inter", "Roboto", sans-serif;
+$font-family-display: "Inter", "Roboto", sans-serif;
 $font-family-base: $font-family;
 $font-family-sans-serif: $font-family;
 
 // Buttons
-$btn-border-radius: 12px;
-$btn-border-radius-lg: 14px;
+$btn-border-radius: 8px;
+$btn-border-radius-lg: 10px;
 
 // Cards
-$card-border-radius: 18px;
+$card-border-radius: 12px;
 $card-bg: #ffffff;
-$card-border-color: #bbf7d0;
+$card-border-color: #e2e8f0;
 
 // Inputs
-$input-border-radius: 12px;
+$input-border-radius: 8px;
 $input-placeholder-color: $muted-color;
-$input-focus-border-color: #2d6a4f;
-$input-focus-box-shadow: 0 0 0 0.2rem rgba(45, 106, 79, 0.15);
+$input-focus-border-color: #4f46e5;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
 
-$input-border-color: #bbf7d0;
+$input-border-color: #d1d5db; // Gray 300
 
-$tag-bg: #fef9c3;
-$tag-text: #854d0e;
+$tag-bg: #eef2ff;
+$tag-text: #4338ca;
 
-$btn-primary-bg: #2d6a4f;
-$btn-primary-hover: #1b4332;
+$btn-primary-bg: #4f46e5;
+$btn-primary-hover: #4338ca;

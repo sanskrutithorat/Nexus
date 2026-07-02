@@ -1,197 +1,169 @@
 @use "@/styles/abstracts/variables" as *;
 
 .header {
-  height: 72px;
-
-  position: fixed;
+  height: 67px;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-
   z-index: 1000;
-
   background: $white;
-
-  border-bottom: 1px solid $border-color;
-
+  // border-bottom: 1px solid $border-color;
   display: flex;
   align-items: center;
+  box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.10196784);
 }
 
-.logoBtn {
-  width: 48px;
-  height: 48px;
-
-  border: none;
-  background: transparent;
-  padding: 0;
-
-  border-radius: 50%;
-  overflow: hidden;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-.logoImage {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  border-radius: 50%;
-
-  border: 2px solid $border-color;
-}
 .container {
   width: 100%;
-
   max-width: 1400px;
-
   margin: 0 auto;
-
   padding: 0 24px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 24px;
 }
 
 /* =========================
-   LEFT
+   LEFT: Search
 ========================= */
 
 .left {
   display: flex;
   align-items: center;
-
-  gap: 16px;
+  flex: 1;
+  max-width: 400px;
 }
 
-.menuBtn {
-  width: 42px;
-  height: 42px;
-
-  border: none;
-
-  border-radius: 10px;
-
-  background: transparent;
-
+.searchWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-
-  svg {
-    font-size: 24px;
-  }
-
-  &:hover {
-    background: $light-bg;
-  }
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-
-  color: $secondary;
-}
-
-/* =========================
-   CENTER
-========================= */
-
-.center {
-  flex: 1;
-
-  display: flex;
-  justify-content: center;
-}
-
-.search {
   width: 100%;
-  max-width: 500px;
-
-  height: 44px;
-
-  border: 1px solid $border-color;
-
-  border-radius: 12px;
-
+  background: #f3f4f6;
+  border-radius: 8px;
   padding: 0 16px;
+  height: 40px;
+  gap: 8px;
+}
 
+.searchIcon {
+  color: $muted-color;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
   outline: none;
-
   font-size: 14px;
+  color: $body-color;
 
-  &:focus {
-    border-color: $primary;
+  &::placeholder {
+    color: #9ca3af;
   }
 }
 
 /* =========================
-   RIGHT
+   RIGHT: Badges & Profile
 ========================= */
 
 .right {
   display: flex;
   align-items: center;
-
-  gap: 12px;
+  gap: 24px;
 }
 
-.actionBtn {
+.rolePreview {
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.roleLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: $muted-color;
+  margin: 0 8px;
+}
+
+.roleBtn {
   border: none;
-
   background: transparent;
-
-  padding: 10px 14px;
-
-  border-radius: 10px;
-
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $muted-color;
   cursor: pointer;
-
-  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
 
   &:hover {
-    background: $light-bg;
-
-    color: $primary;
+    color: $body-color;
   }
 }
 
-.avatar {
+.roleActive {
+  background: $primary;
+  color: $white;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.adminBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $tag-bg;
+  color: $tag-text;
+  border: 1px solid rgba($primary, 0.2);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $primary;
+  }
+}
+
+.bellBtn {
+  position: relative;
   width: 40px;
   height: 40px;
-
+  border: 1px solid $border-color;
   border-radius: 50%;
-
-  background: $primary-gradient;
-
-  color: white;
-
+  background: $white;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-weight: 600;
-
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f9fafb;
+  }
+}
+
+.notificationDot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $danger;
+  border: 2px solid $white;
 }
 
 /* =========================
@@ -199,7 +171,7 @@
 ========================= */
 
 @media (max-width: 992px) {
-  .center {
+  .rolePreview {
     display: none;
   }
 }
@@ -213,16 +185,7 @@
     padding: 0 16px;
   }
 
-  .actionBtn {
+  .adminBadge {
     display: none;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
-  .avatar {
-    width: 36px;
-    height: 36px;
   }
 }

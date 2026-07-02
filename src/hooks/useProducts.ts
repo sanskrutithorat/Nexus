@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { getProducts } from "@/features/products/products.api";
+import { getProducts } from "@/features/projects/products.api";
 
 export const useProducts = (
   limit: number,
