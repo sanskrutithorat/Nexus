@@ -81,12 +81,131 @@
   }
 }
 
-.heading {
-  margin-bottom: 16px;
-  font-size: 24px;
-  font-weight: 700;
+.customerPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .headerLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .pageTitle {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F172A;
+      font-family: "Inter", sans-serif;
+    }
+
+    .pageSubtitle {
+      margin: 0;
+      font-size: 14px;
+      color: #64748B;
+      font-family: "Inter", sans-serif;
+    }
+  }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .exportBtn {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      color: #0F172A;
+
+      &:hover {
+        background: #F1F5F9;
+      }
+    }
+
+    .addBtn {
+      background: #4F46E5;
+      border: 1px solid #4F46E5;
+      color: #FFFFFF;
+
+      &:hover {
+        background: #4338ca;
+      }
+    }
+  }
+}
+
+.filterRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px 24px;
+
+  .filterLeft {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .filterGroup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .filterLabel {
+        font-size: 14px;
+        color: #64748B;
+        font-family: "Inter", sans-serif;
+      }
+
+      .filterSelect {
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #0F172A;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+
+        &:hover {
+          background: #F1F5F9;
+        }
+      }
+    }
+  }
+
+  .filterRight {
+    font-size: 12px;
+    color: #64748B;
+    font-family: "Inter", sans-serif;
+  }
 }
 
 .CustomerTableWrapper {
-  max-height: 500px;
+  height: 450px;
+
+  // Let it grow naturally
 }

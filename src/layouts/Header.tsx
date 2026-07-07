@@ -1,7 +1,17 @@
 import { HiOutlineMagnifyingGlass, HiOutlineBell } from "react-icons/hi2";
+import { Dropdown } from "react-bootstrap";
+import ProfileCard from "./profileCard/ProfileCard";
 import styles from "./Header.module.scss";
 
 const Header = () => {
+  const user = {
+    first_name: "John",
+    last_name: "Doe",
+    email: "john.doe@example.com",
+    roles: "Admin",
+    company: "Google"
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -44,10 +54,29 @@ const Header = () => {
             <HiOutlineBell size={24} color="#6b7280" />
             <span className={styles.notificationDot}></span>
           </button>
-          
-          <button className={styles.avatarBtn}>
+
+          {/* <button className={styles.avatarBtn}>
             MH
-          </button>
+          </button> */}
+          <Dropdown align="end">
+            <Dropdown.Toggle
+              className={`d-flex align-items-center gap-2 bg-white border-0 ${styles.profileTrigger}`}
+              variant="transparent"
+              id="profile-dropdown"
+            >
+              {/* <span className={styles.profileName}>
+                John Doe
+              </span> */}
+
+              <div className={styles.profileAvatarSmall}>
+                JD
+              </div>
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className={`p-0 border-0 shadow-lg ${styles.profileMenu}`}>
+              <ProfileCard user={user} />
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
     </header>

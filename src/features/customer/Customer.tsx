@@ -1,6 +1,6 @@
 import CommonTable from "@/common/CommonTable";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Download, Plus } from "lucide-react";
 import styles from "./Customer.module.scss";
 
 type User = {
@@ -220,13 +220,48 @@ const Customer = () => {
     ];
 
     return (
-        <>
-            <h1 className={styles.heading}>Customer</h1>
-            <div className={styles.CustomerTableWrapper}>
-
-                <CommonTable data={data} columns={columns} />
+        <div className={styles.customerPage}>
+            <div className={styles.pageHeader}>
+                <div className={styles.headerLeft}>
+                    <h1 className={styles.pageTitle}>Customers Directory</h1>
+                    <p className={styles.pageSubtitle}>Manage, filter, and track all corporate client relationships</p>
+                </div>
+                <div className={styles.headerRight}>
+                    <button className={styles.exportBtn}>
+                        <Download size={16} />
+                        Export CSV
+                    </button>
+                    <button className={styles.addBtn}>
+                        <Plus size={16} />
+                        Add Customer
+                    </button>
+                </div>
             </div>
-        </>
+
+            <div className={styles.filterRow}>
+                <div className={styles.filterLeft}>
+                    <div className={styles.filterGroup}>
+                        <span className={styles.filterLabel}>Organization:</span>
+                        <button className={styles.filterSelect}>
+                            All Organizations
+                        </button>
+                    </div>
+                    <div className={styles.filterGroup}>
+                        <span className={styles.filterLabel}>Status:</span>
+                        <button className={styles.filterSelect}>
+                            All Statuses
+                        </button>
+                    </div>
+                </div>
+                <div className={styles.filterRight}>
+                    Showing 1 - 6 of {data.length} customers
+                </div>
+            </div>
+
+            <div className={styles.CustomerTableWrapper}>
+                <CommonTable data={data} columns={columns} itemName="customers" pageSize={6} />
+            </div>
+        </div>
     );
 };
 
