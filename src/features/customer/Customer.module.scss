@@ -209,3 +209,90 @@
 
   // Let it grow naturally
 }
+
+/* =========================
+   ADD CUSTOMER MODAL
+========================= */
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    font-family: "Inter", sans-serif;
+  }
+
+  input, textarea {
+    padding: 10px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    color: #0F172A;
+    background: #F8FAFC;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: #4F46E5;
+      background: #FFFFFF;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #E2E8F0;
+  margin-top: 8px;
+
+  .cancelBtn {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    color: #475569;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #F8FAFC;
+      color: #0F172A;
+    }
+  }
+
+  .saveBtn {
+    background: #4F46E5;
+    border: 1px solid #4F46E5;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #4338ca;
+    }
+  }
+}

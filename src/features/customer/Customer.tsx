@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import CommonTable from "@/common/CommonTable";
+import CommonModal from "@/common/CommonModal";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil, Trash2, Download, Plus } from "lucide-react";
+import { Pencil, Trash2, Download, Plus, X } from "lucide-react";
 import styles from "./Customer.module.scss";
 
 type User = {
@@ -12,6 +14,11 @@ type User = {
 };
 
 const Customer = () => {
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     const data: User[] = [
         {
             id: 1,
@@ -231,7 +238,7 @@ const Customer = () => {
                         <Download size={16} />
                         Export CSV
                     </button>
-                    <button className={styles.addBtn}>
+                    <button className={styles.addBtn} onClick={handleShow}>
                         <Plus size={16} />
                         Add Customer
                     </button>
@@ -261,6 +268,40 @@ const Customer = () => {
             <div className={styles.CustomerTableWrapper}>
                 <CommonTable data={data} columns={columns} itemName="customers" pageSize={6} />
             </div>
+
+            <CommonModal show={showModal} onHide={handleClose} title="Add New Customer" size="lg">
+                <div className={styles.modalForm}>
+                    <div className={styles.formGroup}>
+                        <label>Full Name</label>
+                        <input type="text" defaultValue="Bruce Wayne" />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Email Address</label>
+                        <input type="email" defaultValue="bruce@wayneenterprises.com" />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Phone Number</label>
+                        <input type="text" defaultValue="555-0199" />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Company Name</label>
+                        <input type="text" defaultValue="Wayne Enterprises" />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Address</label>
+                        <textarea defaultValue="1007 Mountain Drive" />
+                    </div>
+
+                    <div className={styles.modalFooter}>
+                        <button className={styles.cancelBtn} onClick={handleClose}>
+                            Cancel
+                        </button>
+                        <button className={styles.saveBtn} onClick={handleClose}>
+                            Save Customer
+                        </button>
+                    </div>
+                </div>
+            </CommonModal>
         </div>
     );
 };
