@@ -11,25 +11,38 @@ $danger: #ef4444;
 $white: #ffffff;
 $black: #111827; // Gray 900
 
-$body-color: #374151; // Gray 700
-$muted-color: #6b7280; // Gray 500
+// Slate / Gray Scale
+$slate-50: #f8fafc;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748B;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0F172A;
 
-$light-bg: #f9fafb; // Gray 50
-$cream: #f3f4f6; // Gray 100
-$border-color: #e2e8f0; // Slate 200
+// Semantic Mapping
+$text-heading: $slate-900;
+$text-body: $slate-600;
+$text-muted: $slate-500;
+$bg-subtle: $slate-50;
+$bg-hover: $slate-100;
+$border-color: $slate-200;
+$body-color: $text-body; // Alias for existing components
+$muted-color: $text-muted; // Alias for existing components
+$light-bg: $slate-50; // Alias for existing components
+$cream: $slate-100; // Alias for existing components
 
-$primary-gradient: linear-gradient(
-  135deg,
-  #4f46e5 0%,
-  #6366f1 100%
-);
+$primary-gradient: linear-gradient(135deg,
+    #4f46e5 0%,
+    #6366f1 100%);
 
-$hero-gradient: linear-gradient(
-  135deg,
-  #eef2ff 0%,
-  #e0e7ff 45%,
-  #f3f4f6 100%
-);
+$hero-gradient: linear-gradient(135deg,
+    #eef2ff 0%,
+    #e0e7ff 45%,
+    #f3f4f6 100%);
 
 // Typography
 $font-family: "Inter", "Roboto", sans-serif;
@@ -59,3 +72,6 @@ $tag-text: #4338ca;
 
 $btn-primary-bg: #4f46e5;
 $btn-primary-hover: #4338ca;
+
+
+// @forward "variables-theme-red-yellow";

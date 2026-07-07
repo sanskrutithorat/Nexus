@@ -1,0 +1,78 @@
+// NexusCRM Theme Palette - Yellow & Red (Warm Theme)
+$primary: #dc2626; // Red 600
+$secondary: #991b1b; // Red 800
+$accent: #f59e0b; // Amber / Yellow 500
+$yellow: #f59e0b;
+
+$success: #10b981;
+$warning: #f59e0b;
+$danger: #ef4444;
+
+$white: #ffffff;
+$black: #1c1917; // Stone 900
+
+// Warm Stone Scale (replaces Slate)
+$slate-50: #fafaf9;
+$slate-100: #f5f5f4;
+$slate-200: #e7e5e4;
+$slate-300: #d6d3d1;
+$slate-400: #a8a29e;
+$slate-500: #78716c;
+$slate-600: #57534e;
+$slate-700: #44403c;
+$slate-800: #292524;
+$slate-900: #1c1917;
+
+// Semantic Mapping
+$text-heading: $slate-900;
+$text-body: $slate-600;
+$text-muted: $slate-500;
+$bg-subtle: $slate-50;
+$bg-hover: $slate-100;
+$border-color: $slate-200;
+$body-color: $text-body; // Alias for existing components
+$muted-color: $text-muted; // Alias for existing components
+$light-bg: $slate-50; // Alias for existing components
+$cream: $slate-100; // Alias for existing components
+
+$primary-gradient: linear-gradient(
+  135deg,
+  #dc2626 0%, // Red
+  #f59e0b 100% // Yellow
+);
+
+$hero-gradient: linear-gradient(
+  135deg,
+  #fef2f2 0%, // Red 50
+  #ffedd5 45%, // Orange 50
+  #fef3c7 100% // Amber 50
+);
+
+// Typography
+$font-family: "Inter", "Roboto", sans-serif;
+$font-family-display: "Inter", "Roboto", sans-serif;
+$font-family-base: $font-family;
+$font-family-sans-serif: $font-family;
+
+// Buttons
+$btn-border-radius: 8px;
+$btn-border-radius-lg: 10px;
+
+// Cards
+$card-border-radius: 12px;
+$card-bg: #ffffff;
+$card-border-color: $border-color;
+
+// Inputs
+$input-border-radius: 8px;
+$input-placeholder-color: $muted-color;
+$input-focus-border-color: $primary;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.15); // Red shadow
+
+$input-border-color: $slate-300; 
+
+$tag-bg: #fef2f2; // Light Red background for badges
+$tag-text: #b91c1c; // Dark Red text
+
+$btn-primary-bg: $primary;
+$btn-primary-hover: $secondary;

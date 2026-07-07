@@ -10,8 +10,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #eef2ff;
-  color: #4f46e5;
+  background: $tag-bg;
+  color: $primary;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@
 }
 
 .nameText {
-  color: #0F172A;
+  color: $text-heading;
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -36,7 +36,7 @@
 }
 
 .idText {
-  color: #64748B;
+  color: $text-muted;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 10px;
@@ -44,7 +44,7 @@
 }
 
 .companyText {
-  color: #0F172A;
+  color: $text-heading;
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -60,7 +60,7 @@
 .actionBtn {
   background: transparent;
   border: none;
-  color: #64748B;
+  color: $text-muted;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -71,13 +71,13 @@
 
 .editBtn {
   &:hover {
-    color: #0F172A;
+    color: $text-heading;
   }
 }
 
 .deleteBtn {
   &:hover {
-    color: #ef4444; // danger color
+    color: $danger; // danger color
   }
 }
 
@@ -101,14 +101,14 @@
       margin: 0;
       font-size: 24px;
       font-weight: 700;
-      color: #0F172A;
+      color: $text-heading;
       font-family: "Inter", sans-serif;
     }
 
     .pageSubtitle {
       margin: 0;
       font-size: 14px;
-      color: #64748B;
+      color: $text-muted;
       font-family: "Inter", sans-serif;
     }
   }
@@ -133,22 +133,22 @@
     }
 
     .exportBtn {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      color: #0F172A;
+      background: $bg-subtle;
+      border: 1px solid $border-color;
+      color: $text-heading;
 
       &:hover {
-        background: #F1F5F9;
+        background: $bg-hover;
       }
     }
 
     .addBtn {
-      background: #4F46E5;
-      border: 1px solid #4F46E5;
-      color: #FFFFFF;
+      background: $primary;
+      border: 1px solid $primary;
+      color: $white;
 
       &:hover {
-        background: #4338ca;
+        background: $secondary;
       }
     }
   }
@@ -158,8 +158,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: $white;
+  border: 1px solid $border-color;
   border-radius: 12px;
   padding: 12px 24px;
 
@@ -175,23 +175,23 @@
 
       .filterLabel {
         font-size: 14px;
-        color: #64748B;
+        color: $text-muted;
         font-family: "Inter", sans-serif;
       }
 
       .filterSelect {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
+        background: $bg-subtle;
+        border: 1px solid $border-color;
         border-radius: 6px;
         padding: 6px 12px;
         font-size: 14px;
         font-weight: 600;
-        color: #0F172A;
+        color: $text-heading;
         font-family: "Inter", sans-serif;
         cursor: pointer;
 
         &:hover {
-          background: #F1F5F9;
+          background: $bg-hover;
         }
       }
     }
@@ -199,7 +199,7 @@
 
   .filterRight {
     font-size: 12px;
-    color: #64748B;
+    color: $text-muted;
     font-family: "Inter", sans-serif;
   }
 }
@@ -228,24 +228,24 @@
   label {
     font-size: 13px;
     font-weight: 600;
-    color: #475569;
+    color: $text-body;
     font-family: "Inter", sans-serif;
   }
 
   input, textarea {
     padding: 10px 12px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid $border-color;
     border-radius: 8px;
     font-size: 14px;
     font-family: "Inter", sans-serif;
-    color: #0F172A;
-    background: #F8FAFC;
+    color: $text-heading;
+    background: $bg-subtle;
     outline: none;
     transition: border-color 0.2s ease;
 
     &:focus {
-      border-color: #4F46E5;
-      background: #FFFFFF;
+      border-color: $primary;
+      background: $white;
     }
   }
 
@@ -260,13 +260,13 @@
   justify-content: flex-end;
   gap: 12px;
   padding-top: 16px;
-  border-top: 1px solid #E2E8F0;
+  border-top: 1px solid $border-color;
   margin-top: 8px;
 
   .cancelBtn {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    color: #475569;
+    background: $white;
+    border: 1px solid $border-color;
+    color: $text-body;
     padding: 8px 16px;
     border-radius: 8px;
     font-weight: 600;
@@ -275,15 +275,15 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: #F8FAFC;
-      color: #0F172A;
+      background: $bg-subtle;
+      color: $text-heading;
     }
   }
 
   .saveBtn {
-    background: #4F46E5;
-    border: 1px solid #4F46E5;
-    color: #FFFFFF;
+    background: $primary;
+    border: 1px solid $primary;
+    color: $white;
     padding: 8px 16px;
     border-radius: 8px;
     font-weight: 600;
@@ -292,7 +292,7 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: #4338ca;
+      background: $secondary;
     }
   }
 }

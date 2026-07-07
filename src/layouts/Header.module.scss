@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  background: #f3f4f6;
+  background: $bg-subtle;
   border-radius: 8px;
   padding: 0 16px;
   height: 40px;
@@ -59,7 +59,7 @@
   color: $body-color;
 
   &::placeholder {
-    color: #9ca3af;
+    color: $slate-400;
   }
 }
 
@@ -76,7 +76,7 @@
 .rolePreview {
   display: flex;
   align-items: center;
-  background: #f3f4f6;
+  background: $bg-subtle;
   border-radius: 8px;
   padding: 4px;
   gap: 4px;
@@ -151,7 +151,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f9fafb;
+    background: $bg-hover;
   }
 }
 
@@ -193,7 +193,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f9fafb !important;
+    background: $bg-hover !important;
   }
 
   &:focus {
@@ -215,7 +215,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #6d5dfc;
+  background: $primary;
   color: $white;
   display: flex;
   align-items: center;

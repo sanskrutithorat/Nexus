@@ -5,7 +5,7 @@
   max-height: 100%;
   background: $white;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid $border-color;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -36,14 +36,14 @@
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #64748B;
-    background: #F1F5F9;
-    border-bottom: 1px solid #e2e8f0;
+    color: $text-muted;
+    background: $bg-hover;
+    border-bottom: 1px solid $border-color;
   }
 
   tr {
-    background: #FFFFFF;
-    border-bottom: 1px solid #e2e8f0;
+    background: $white;
+    border-bottom: 1px solid $border-color;
     transition: background 0.2s ease;
 
     &:last-child {
@@ -51,7 +51,7 @@
     }
 
     &:hover {
-      background: #f8fafc;
+      background: $bg-subtle;
     }
   }
 
@@ -61,7 +61,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    color: #64748B;
+    color: $text-muted;
   }
 
   .paginationFooter {
@@ -69,10 +69,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 11px 16px;
-    background: #F1F5F9;
-    border-top: 1px solid #e2e8f0;
+    background: $bg-hover;
+    border-top: 1px solid $border-color;
     font-family: "Inter", sans-serif;
-    color: #64748B;
+    color: $text-muted;
 
     .paginationInfo {
       font-size: 12px;
@@ -96,22 +96,22 @@
         align-items: center;
         gap: 6px;
         padding: 8px 12px;
-        background: #FFFFFF;
-        border: 1px solid #e2e8f0;
+        background: $white;
+        border: 1px solid $border-color;
         border-radius: 6px;
         font-size: 12px;
         font-weight: 600;
         line-height: 16px;
-        color: #334155;
+        color: $slate-700;
         cursor: pointer;
         transition: all 0.2s ease;
 
         svg {
-          color: #64748B;
+          color: $text-muted;
         }
 
         &:hover:not(:disabled) {
-          background: #F1F5F9;
+          background: $bg-hover;
         }
 
         &:disabled {

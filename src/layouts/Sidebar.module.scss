@@ -94,7 +94,7 @@
 
 .link {
   text-decoration: none;
-  color: #64748B;
+  color: $text-muted;
   padding: 12px;
   border-radius: 12px;
   transition: 0.2s ease;
@@ -105,16 +105,16 @@
   overflow: hidden;
 
   svg {
-    color: #64748B;
+    color: $text-muted;
     transition: 0.2s ease;
   }
 
   &:hover {
-    // background: rgba(#4F46E5, 0.08);
-    color: #4F46E5;
+    // background: rgba($primary, 0.08);
+    color: $primary;
 
     svg {
-      color: #4F46E5;
+      color: $primary;
     }
   }
 }
@@ -131,11 +131,11 @@
 }
 
 .active {
-  background: rgba(#4F46E5, 0.08);
-  color: #4F46E5;
+  background: rgba($primary, 0.08);
+  color: $primary;
 
   svg {
-    color: #4F46E5;
+    color: $primary;
   }
 
   .linkText {

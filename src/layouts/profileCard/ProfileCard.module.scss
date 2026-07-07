@@ -1,13 +1,15 @@
+@use "@/styles/abstracts/variables" as *;
+
 /* =========================
    PROFILE Card 
 ========================= */
 
 .profile-card {
-    background: #ffffff;
+    background: $white;
     border-radius: 18px;
     overflow: hidden;
     padding: 20px;
-    box-shadow: 3px 1px 11px 0px rgb(0 0 0 / 0%);
+    box-shadow: 3px 1px 11px 0px rgba(0, 0, 0, 0);
 }
 
 /* =========================
@@ -19,8 +21,7 @@
     align-items: flex-start;
     gap: 16px;
     padding: 14px 10px;
-    background: #F1F5F9;
-    ;
+    background: $bg-hover;
     border-radius: 12px;
 }
 
@@ -28,8 +29,8 @@
     width: 49px;
     height: 49px;
     border-radius: 50%;
-    background: #6d5dfc;
-    color: white;
+    background: $primary;
+    color: $white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,15 +48,15 @@
     margin: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
+    color: $text-heading;
 }
 
 .profile-badge {
     display: inline-flex;
     margin-top: 3px;
     margin-bottom: 5px;
-    background: #e7e1ff;
-    color: #7c3aed;
+    background: $tag-bg;
+    color: $tag-text;
     padding: 2px 25px;
     border-radius: 10px;
     font-size: 13px;
@@ -67,7 +68,7 @@
     align-items: center;
     gap: 7px;
     margin-top: 5px;
-    color: #374151;
+    color: $text-body;
     font-size: 13px;
 }
 
@@ -81,7 +82,7 @@
 
 .profile-card-menu {
     padding: 5px 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid $border-color;
 }
 
 header .profile-menu-item {
@@ -93,19 +94,18 @@ header .profile-menu-item {
     border: none;
     background: transparent;
     font-size: 13px;
-    color: #374151;
+    color: $text-body;
     cursor: pointer;
     transition: background 0.2s ease;
 }
 
 .profile-menu-item:hover {
-    background: #f8fafc;
+    background: $bg-subtle;
 }
 
 header .profile-menu-item:hover {
-    background-color: #f8fafc;
+    background-color: $bg-subtle;
 }
-
 
 /* =========================
      FOOTER
@@ -121,7 +121,7 @@ header .logout-button {
     gap: 12px;
     border: none;
     background: transparent;
-    color: #ff5c5c;
+    color: $danger;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -130,7 +130,7 @@ header .logout-button {
 }
 
 header .logout-button:hover {
-    background-color: #f8fafc;
+    background-color: $bg-subtle;
 }
 
 header .logout-button:hover {
@@ -140,5 +140,5 @@ header .logout-button:hover {
 .profile-card-footer p {
     margin: 3px 0 0;
     font-size: 12px;
-    color: #9ca3af;
+    color: $text-muted;
 }
