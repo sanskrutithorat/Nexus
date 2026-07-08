@@ -2,14 +2,17 @@ import { HiOutlineMagnifyingGlass, HiOutlineBell } from "react-icons/hi2";
 import { Dropdown } from "react-bootstrap";
 import ProfileCard from "./profileCard/ProfileCard";
 import styles from "./Header.module.scss";
+import { useMe } from "@/hooks/useAuth";
 
 const Header = () => {
+  const { data: userProfile } = useMe();
+
   const user = {
-    first_name: "John",
-    last_name: "Doe",
-    email: "john.doe@example.com",
-    roles: "Admin",
-    company: "Google"
+    first_name: userProfile?.first_name || "",
+    last_name: userProfile?.last_name || "",
+    email: userProfile?.email || "",
+    roles: userProfile?.role || "",
+    company: userProfile?.organization || ""
   };
 
   return (
@@ -69,7 +72,7 @@ const Header = () => {
               </span> */}
 
               <div className={styles.profileAvatarSmall}>
-                JD
+                {`${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase() || user.email?.charAt(0)?.toUpperCase() || "U"}
               </div>
             </Dropdown.Toggle>
 

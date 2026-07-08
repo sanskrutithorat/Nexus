@@ -23,10 +23,11 @@ const ProfileCard = ({ user }: ProfileCardProps) => {
     const logout = useLogout();
     const getInitials = (
         firstName?: string,
-        lastName?: string
+        lastName?: string,
+        email?: string
     ) => {
-        return `${firstName?.charAt(0) || ""}${lastName?.charAt(0) || ""
-            }`.toUpperCase();
+        const initials = `${firstName?.charAt(0) || ""}${lastName?.charAt(0) || ""}`.toUpperCase();
+        return initials || email?.charAt(0)?.toUpperCase() || "U";
     };
 
     return (
@@ -38,7 +39,8 @@ const ProfileCard = ({ user }: ProfileCardProps) => {
                 <div className={styles["profile-avatar"]}>
                     {getInitials(
                         user?.first_name,
-                        user?.last_name
+                        user?.last_name,
+                        user?.email
                     )}
                 </div>
 
