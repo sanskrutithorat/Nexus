@@ -1,5 +1,4 @@
-import "./Register.module.scss"
-
+import styles from "./Register.module.scss"
 
 const Register = () => {
     return (

@@ -1,0 +1,68 @@
+@use "@/styles/abstracts/variables" as *;
+
+.kpicard {
+    flex: 1;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid $border-color;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.iconBtn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.amount {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: $text-heading;
+    line-height: 1.2;
+}
+
+.growth {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+
+    &.positive {
+        color: #10b981;
+    }
+
+    &.neutral {
+        color: $text-muted;
+    }
+
+    &.negative {
+        color: #ef4444;
+    }
+}
+
+.arrow {
+    font-size: 14px;
+}
