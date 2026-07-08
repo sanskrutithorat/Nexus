@@ -52,8 +52,7 @@ export const refreshTokenApi = async (
   const response = await publicApi.post(
     API_ENDPOINTS.AUTH.REFRESH,
     {
-      refreshToken,
-      expiresInMins: 30,
+      refresh: refreshToken,
     }
   );
   

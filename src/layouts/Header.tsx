@@ -35,21 +35,21 @@ const Header = () => {
           {/* Role Preview */}
           <div className={styles.rolePreview}>
             <span className={styles.roleLabel}>Role Preview:</span>
-            <button className={`${styles.roleBtn} ${styles.roleActive}`}>
+            <button className={`${styles.roleBtn} ${user.roles?.toLowerCase() === 'admin' ? styles.roleActive : ''}`}>
               👑 Admin
             </button>
-            <button className={styles.roleBtn}>
+            <button className={`${styles.roleBtn} ${user.roles?.toLowerCase() === 'employee' ? styles.roleActive : ''}`}>
               🏆 Employee
             </button>
-            <button className={styles.roleBtn}>
+            <button className={`${styles.roleBtn} ${user.roles?.toLowerCase() === 'viewer' ? styles.roleActive : ''}`}>
               👁️ Viewer
             </button>
           </div>
 
-          {/* Admin Badge */}
+          {/* Role Badge */}
           <div className={styles.adminBadge}>
             <span className={styles.dot}></span>
-            🔥 Admin Role
+            🔥 {user.roles ? user.roles.charAt(0).toUpperCase() + user.roles.slice(1) : "User"}
           </div>
 
           {/* Bell Icon */}
