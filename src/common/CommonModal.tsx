@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
 import { Modal } from "react-bootstrap";
 import styles from "./CommonModal.module.scss";
+import type { ReactNode } from "react";
 
 type CommonModalProps = {
     show: boolean;
@@ -13,10 +13,10 @@ type CommonModalProps = {
 
 const CommonModal = ({ show, onHide, title, children, size, className = "" }: CommonModalProps) => {
     return (
-        <Modal 
-            show={show} 
-            onHide={onHide} 
-            centered 
+        <Modal
+            show={show}
+            onHide={onHide}
+            centered
             size={size}
             className={`${styles.commonModal} ${className}`}
         >

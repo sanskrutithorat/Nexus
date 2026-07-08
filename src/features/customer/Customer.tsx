@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CommonTable from "@/common/CommonTable";
 import CommonModal from "@/common/CommonModal";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil, Trash2, Download, Plus, X } from "lucide-react";
+import { Pencil, Trash2, Download, Plus } from "lucide-react";
 import styles from "./Customer.module.scss";
 
 type User = {
