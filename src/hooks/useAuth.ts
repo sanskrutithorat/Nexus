@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/store/authStore";
 import { useMutation } from "@tanstack/react-query";
-import { loginApi } from "@/features/auth/auth.api";
+import { loginApi, logoutApi } from "@/features/auth/auth.api";
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentUser } from "@/features/auth/auth.api";
 
@@ -9,8 +9,16 @@ export const useLogout = () => {
     useAuthStore(
       (state) => state.logout
     );
+  const refreshToken = useAuthStore((state) => state.refreshToken);
 
-  return () => {
+  return async () => {
+    if (refreshToken) {
+      try {
+        await logoutApi(refreshToken);
+      } catch (e) {
+        console.error(e);
+      }
+    }
     logout();
 
     localStorage.removeItem(
@@ -33,14 +41,9 @@ export const useLogin = () => {
 
     onSuccess: (data) => {
       setAuth(
-        data.accessToken,
-        data.refreshToken,
-        {
-          id: data.id,
-          username: data.username,
-          email: data.email,
-          role: data.role,
-        }
+        data.access,
+        data.refresh,
+        data.user
       );
     },
   });

@@ -1,8 +1,9 @@
 export const API_ENDPOINTS = {
     AUTH: {
-      LOGIN: "/auth/login",
-      ME: "/auth/me",
-      REFRESH: "/auth/refresh",
+      LOGIN: "api/auth/login/",
+      LOGOUT: "api/auth/logout/",
+      ME: "api/auth/profile/",
+      REFRESH: "api/auth/refresh/",
     },
     PRODUCTS:{
         GET_PRODUCTS:'/products'

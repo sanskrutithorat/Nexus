@@ -49,13 +49,13 @@ privateApi.interceptors.response.use(
         useAuthStore
           .getState()
           .setAuth(
-            refreshResponse.accessToken,
-            refreshResponse.refreshToken,
+            refreshResponse.access,
+            refreshResponse.refresh,
             store.user!
           );
 
         originalRequest.headers.Authorization =
-          `Bearer ${refreshResponse.accessToken}`;
+          `Bearer ${refreshResponse.access}`;
 
         return privateApi(
           originalRequest

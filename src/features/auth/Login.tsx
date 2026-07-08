@@ -7,7 +7,7 @@ import { useLogin } from "../../hooks/useAuth";
 import styles from "./Login.module.scss";
 
 type LoginFormData = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -69,22 +69,26 @@ const Login = () => {
             className={styles.form}
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* USERNAME */}
+            {/* EMAIL */}
             <div className={styles.formGroup}>
-              <label>Username</label>
+              <label>Email</label>
 
               <input
-                type="text"
-                placeholder="Enter username"
-                {...register("username", {
+                type="email"
+                placeholder="Enter email"
+                {...register("email", {
                   required:
-                    "Username is required",
+                    "Email is required",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Invalid email address"
+                  }
                 })}
               />
 
-              {errors.username && (
+              {errors.email && (
                 <span className={styles.error}>
-                  {errors.username.message}
+                  {errors.email.message}
                 </span>
               )}
             </div>
