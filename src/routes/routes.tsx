@@ -10,6 +10,7 @@ import Profile from "@/features/profile/Profile";
 import Projects from "@/features/projects/Projects";
 import Customer from "@/features/customer/Customer";
 import Task from "@/features/task/Task";
+import Register from "@/features/register/Register";
 
 
 export const router = createBrowserRouter([
@@ -22,6 +23,11 @@ export const router = createBrowserRouter([
         path: "/auth",
         element: <BlankLayout />,
         children: [{ path: "login", element: <Login /> }],
+    },
+    {
+        path: "/auth",
+        element: <BlankLayout />,
+        children: [{ path: "register", element: <Register /> }],
     },
 
     {
