@@ -1,4 +1,3 @@
-import React from "react";
 import {
     type ColumnDef,
     flexRender,
@@ -17,12 +16,12 @@ type CommonTableProps<T> = {
     itemName?: string;
 };
 
-const CommonTable = <T,>({ 
-    data, 
-    columns, 
+const CommonTable = <T,>({
+    data,
+    columns,
     showPagination = true,
-    pageSize = 10, 
-    itemName = "items" 
+    pageSize = 10,
+    itemName = "items"
 }: CommonTableProps<T>) => {
     const table = useReactTable({
         data,

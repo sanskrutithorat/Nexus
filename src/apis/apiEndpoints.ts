@@ -7,5 +7,8 @@ export const API_ENDPOINTS = {
     },
     PRODUCTS:{
         GET_PRODUCTS:'/products'
+    },
+    CUSTOMER: {
+        CUSTOMERS: "api/customers/"
     }
   } as const;

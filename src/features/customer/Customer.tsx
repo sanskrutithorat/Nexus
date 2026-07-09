@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CommonTable from "@/common/CommonTable";
-import CommonModal from "@/common/CommonModal";
+import CreateCustomerModal from "./CreateCustomerModal";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2, Download, Plus } from "lucide-react";
 import styles from "./Customer.module.scss";
@@ -269,39 +269,7 @@ const Customer = () => {
                 <CommonTable data={data} columns={columns} itemName="customers" pageSize={6} />
             </div>
 
-            <CommonModal show={showModal} onHide={handleClose} title="Add New Customer" size="lg">
-                <div className={styles.modalForm}>
-                    <div className={styles.formGroup}>
-                        <label>Full Name</label>
-                        <input type="text" defaultValue="Bruce Wayne" />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label>Email Address</label>
-                        <input type="email" defaultValue="bruce@wayneenterprises.com" />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label>Phone Number</label>
-                        <input type="text" defaultValue="555-0199" />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label>Company Name</label>
-                        <input type="text" defaultValue="Wayne Enterprises" />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label>Address</label>
-                        <textarea defaultValue="1007 Mountain Drive" />
-                    </div>
-
-                    <div className={styles.modalFooter}>
-                        <button className={styles.cancelBtn} onClick={handleClose}>
-                            Cancel
-                        </button>
-                        <button className={styles.saveBtn} onClick={handleClose}>
-                            Save Customer
-                        </button>
-                    </div>
-                </div>
-            </CommonModal>
+            <CreateCustomerModal show={showModal} onHide={handleClose} />
         </div>
     );
 };
