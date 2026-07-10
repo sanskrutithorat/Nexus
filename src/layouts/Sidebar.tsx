@@ -68,7 +68,7 @@ const Sidebar = () => {
           <span className={styles.linkText}>Projects</span>
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
           to="/profile"
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
@@ -76,7 +76,7 @@ const Sidebar = () => {
         >
           <HiOutlineUser size={24} className={styles.icon} />
           <span className={styles.linkText}>Profile</span>
-        </NavLink>
+        </NavLink> */}
 
         <NavLink
           to="/setting"

@@ -36,14 +36,14 @@ export const getallCustomer = async (
         { params }
     );
 
-    return response.data;
+    return response.data.data;
 };
 
 export const getCustomerDetails = async (id: number): Promise<Customer> => {
     const response = await privateApi.get(
         `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`
     );
-    return response.data;
+    return response.data.data;
 };
 
 export const createCustomer = async (data: Partial<Customer>): Promise<Customer> => {
@@ -51,7 +51,7 @@ export const createCustomer = async (data: Partial<Customer>): Promise<Customer>
         API_ENDPOINTS.CUSTOMER.CUSTOMERS,
         data
     );
-    return response.data;
+    return response.data.data;
 };
 
 export const updateCustomer = async (id: number, data: Partial<Customer>): Promise<Customer> => {
@@ -59,7 +59,7 @@ export const updateCustomer = async (id: number, data: Partial<Customer>): Promi
         `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`,
         data
     );
-    return response.data;
+    return response.data.data;
 };
 
 export const deleteCustomer = async (id: number): Promise<void> => {

@@ -6,7 +6,7 @@ interface ProjectCardProps {
   budget: string;
   title: string;
   subtitle: string;
-  status?: "NEW" | "IN PROGRESS";
+  status?: "new" | "In Progress";
   client?: string;
   startDate?: string;
   endDate?: string;
@@ -24,11 +24,11 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   let statusClass = "";
   let badgeClass = "";
-  
-  if (status === "NEW") {
+
+  if (status === "new") {
     statusClass = styles.statusNew;
     badgeClass = styles.new;
-  } else if (status === "IN PROGRESS") {
+  } else if (status === "In Progress") {
     statusClass = styles.statusInProgress;
     badgeClass = styles.inProgress;
   }
@@ -45,15 +45,15 @@ const ProjectCard = ({
           <div className={styles.budgetAmount}>{budget}</div>
         </div>
       </div>
-      
+
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.subtitle}>{subtitle}</p>
-      
+
       {(client || (startDate && endDate)) && (
         <div className={styles.footer}>
           {client ? (
             <div className={styles.clientInfo}>
-              Client: 
+              Client:
               <span className={styles.clientLink}>
                 <ExternalLink size={14} /> {client}
               </span>
@@ -61,7 +61,7 @@ const ProjectCard = ({
           ) : (
             <div></div>
           )}
-          
+
           {(startDate && endDate) && (
             <div className={styles.datesAndEdit}>
               <div className={styles.dates}>

@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, CreditCard, Activity, CheckCircle, Layers, Clock, Box } from "react-feather";
 import KpiCard from "@/common/KpiCard/KpiCard";
 import styles from "./Projects.module.scss";
 import ProjectCard from "@/common/ProjectCard/ProjectCard";
 import CreateProjectModal from "./CreateProjectModal";
+import { useGetProjects } from "@/hooks/useProjects";
 
 const Projects = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const { data: ProjectData, isLoading, isError } = useGetProjects();
+
+  const data: any = ProjectData?.results || [];
+
+  useEffect(() => {
+    console.log(data);
+    console.log(isLoading)
+    console.log(isError)
+  }, []);
 
   return (
     <div>
@@ -83,7 +93,36 @@ const Projects = () => {
 
       <div className={styles.taskContainer}>
         <div className={styles.leftContainer}>
+          {data && data.length > 0 ? (
+            data.map((project) => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                status={project.status}
+                budget="$1,200,000"
+                title={project.name}
+                subtitle={project.description}
+                client={project.customer.name}
+                startDate={project.start_date}
+                endDate={project.end_date}
+              />
+            ))
+          ) : (
+            <div className={styles.noData}>
+              <p>No projects found</p>
+            </div>
+          )}
           <ProjectCard
+            id="PRJ-108"
+            status="In Progress"
+            budget="$1,200,000"
+            title="Arc Reactor Power Network"
+            subtitle="Deploying clean fusion energy microgrids across metropolitan distribution centers."
+            client="Stark Industries"
+            startDate="Nov 01, 2024"
+            endDate="Dec 15, 2025"
+          />
+          {/* <ProjectCard
             id="PRJ-204"
             status="NEW"
             budget="$450,000"
@@ -94,16 +133,6 @@ const Projects = () => {
             endDate="Jun 30, 2025"
           />
 
-          <ProjectCard
-            id="PRJ-108"
-            status="IN PROGRESS"
-            budget="$1,200,000"
-            title="Arc Reactor Power Network"
-            subtitle="Deploying clean fusion energy microgrids across metropolitan distribution centers."
-            client="Stark Industries"
-            startDate="Nov 01, 2024"
-            endDate="Dec 15, 2025"
-          />
 
           <ProjectCard
             id="PRJ-094"
@@ -160,7 +189,7 @@ const Projects = () => {
             client="Daily Planet"
             startDate="Nov 01, 2024"
             endDate="Dec 15, 2025"
-          />
+          /> */}
         </div>
 
         <div className={styles.rightContainer}>
@@ -226,7 +255,9 @@ const Projects = () => {
         </div>
       </div>
 
-      <CreateProjectModal show={showCreateModal} onHide={() => setShowCreateModal(false)} />
+      {showCreateModal && (
+        <CreateProjectModal show={showCreateModal} onHide={() => setShowCreateModal(false)} />
+      )}
     </div>
   );
 }

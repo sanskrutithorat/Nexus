@@ -1,175 +1,52 @@
 import { useState } from "react";
 import CommonTable from "@/common/CommonTable";
+import CommonModal from "@/common/CommonModal";
 import CreateCustomerModal from "./CreateCustomerModal";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2, Download, Plus } from "lucide-react";
+import { useGetCustomers, useDeleteCustomer } from "@/hooks/useCustomers";
+import type { Customer as CustomerType } from "@/features/customer/customer.api";
 import styles from "./Customer.module.scss";
 
-type User = {
-    id: number;
-    name: string;
-    email: string;
-    company: string;
-    phoneNumber: string;
-};
-
 const Customer = () => {
+    const { data: customerData, isLoading, isError } = useGetCustomers();
+    const deleteCustomerMutation = useDeleteCustomer();
+
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [customerToDelete, setCustomerToDelete] = useState<CustomerType | null>(null);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    const data: User[] = [
-        {
-            id: 1,
-            name: "John Doe",
-            email: "john@test.com",
-            company: "Google",
-            phoneNumber: "9876543210",
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            email: "jane@test.com",
-            company: "Microsoft",
-            phoneNumber: "9876543211",
-        },
-        {
-            id: 3,
-            name: "Michael Johnson",
-            email: "michael@test.com",
-            company: "Amazon",
-            phoneNumber: "9876543212",
-        },
-        {
-            id: 4,
-            name: "Emily Davis",
-            email: "emily@test.com",
-            company: "Apple",
-            phoneNumber: "9876543213",
-        },
-        {
-            id: 5,
-            name: "Chris Wilson",
-            email: "chris@test.com",
-            company: "Netflix",
-            phoneNumber: "9876543214",
-        },
-        {
-            id: 6,
-            name: "Sophia Brown",
-            email: "sophia@test.com",
-            company: "Meta",
-            phoneNumber: "9876543215",
-        },
-        {
-            id: 7,
-            name: "Daniel Miller",
-            email: "daniel@test.com",
-            company: "Adobe",
-            phoneNumber: "9876543216",
-        },
-        {
-            id: 8,
-            name: "Olivia Taylor",
-            email: "olivia@test.com",
-            company: "Tesla",
-            phoneNumber: "9876543217",
-        },
-        {
-            id: 9,
-            name: "James Anderson",
-            email: "james@test.com",
-            company: "IBM",
-            phoneNumber: "9876543218",
-        },
-        {
-            id: 10,
-            name: "Emma Thomas",
-            email: "emma@test.com",
-            company: "Intel",
-            phoneNumber: "9876543219",
-        },
-        {
-            id: 11,
-            name: "William Jackson",
-            email: "william@test.com",
-            company: "Oracle",
-            phoneNumber: "9876543220",
-        },
-        {
-            id: 12,
-            name: "Ava White",
-            email: "ava@test.com",
-            company: "Cisco",
-            phoneNumber: "9876543221",
-        },
-        {
-            id: 13,
-            name: "Benjamin Harris",
-            email: "ben@test.com",
-            company: "Salesforce",
-            phoneNumber: "9876543222",
-        },
-        {
-            id: 14,
-            name: "Charlotte Martin",
-            email: "charlotte@test.com",
-            company: "Spotify",
-            phoneNumber: "9876543223",
-        },
-        {
-            id: 15,
-            name: "Lucas Thompson",
-            email: "lucas@test.com",
-            company: "Uber",
-            phoneNumber: "9876543224",
-        },
-        {
-            id: 16,
-            name: "Mia Garcia",
-            email: "mia@test.com",
-            company: "Airbnb",
-            phoneNumber: "9876543225",
-        },
-        {
-            id: 17,
-            name: "Henry Martinez",
-            email: "henry@test.com",
-            company: "Twitter",
-            phoneNumber: "9876543226",
-        },
-        {
-            id: 18,
-            name: "Amelia Robinson",
-            email: "amelia@test.com",
-            company: "PayPal",
-            phoneNumber: "9876543227",
-        },
-        {
-            id: 19,
-            name: "Alexander Clark",
-            email: "alex@test.com",
-            company: "Dropbox",
-            phoneNumber: "9876543228",
-        },
-        {
-            id: 20,
-            name: "Harper Lewis",
-            email: "harper@test.com",
-            company: "Slack",
-            phoneNumber: "9876543229",
-        },
-    ];
+    const handleDeleteClick = (customer: CustomerType) => {
+        setCustomerToDelete(customer);
+        setShowDeleteModal(true);
+    };
 
-    const columns: ColumnDef<User>[] = [
+    const handleConfirmDelete = () => {
+        if (customerToDelete) {
+            deleteCustomerMutation.mutate(customerToDelete.id, {
+                onSuccess: () => {
+                    setShowDeleteModal(false);
+                    setCustomerToDelete(null);
+                }
+            });
+        }
+    };
+
+    const data = customerData?.results || [];
+
+
+
+    const columns: ColumnDef<CustomerType>[] = [
         {
             accessorKey: "name",
             header: "NAME",
             cell: ({ row }) => {
                 const name = row.original.name;
                 const id = row.original.id;
-                const initials = name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+                const initials = name ? name.split(" ").filter(Boolean).map(n => n[0]).join("").toUpperCase().slice(0, 2) : "??";
 
                 return (
                     <div className={styles.nameContainer}>
@@ -185,7 +62,7 @@ const Customer = () => {
             }
         },
         {
-            accessorKey: "company",
+            accessorKey: "company_name",
             header: "COMPANY NAME",
             cell: ({ getValue }) => (
                 <span className={styles.companyText}>{getValue() as string}</span>
@@ -196,11 +73,15 @@ const Customer = () => {
             header: "EMAIL",
         },
         {
-            accessorKey: "phoneNumber",
+            accessorKey: "phone",
             header: "PHONE NUMBER",
             cell: ({ getValue }) => {
                 const val = getValue() as string;
-                return `+1 (555) ${val.slice(3, 6)}-${val.slice(6, 10)}`;
+                if (!val) return "N/A";
+                if (val.length >= 10) {
+                    return `+1 (555) ${val.slice(3, 6)}-${val.slice(6, 10)}`;
+                }
+                return val;
             }
         },
         {
@@ -216,7 +97,7 @@ const Customer = () => {
                     </button>
 
                     <button
-                        onClick={() => console.log("Delete", row.original)}
+                        onClick={() => handleDeleteClick(row.original)}
                         className={`${styles.actionBtn} ${styles.deleteBtn}`}
                     >
                         <Trash2 size={18} />
@@ -261,15 +142,41 @@ const Customer = () => {
                     </div>
                 </div>
                 <div className={styles.filterRight}>
-                    Showing 1 - 6 of {data.length} customers
+                    Showing {data.length > 0 ? 1 : 0} - {data.length} of {customerData?.count || 0} customers
                 </div>
             </div>
 
             <div className={styles.CustomerTableWrapper}>
-                <CommonTable data={data} columns={columns} itemName="customers" pageSize={6} />
+                {isLoading ? (
+                    <div>Loading customers...</div>
+                ) : isError ? (
+                    <div>Error loading customers.</div>
+                ) : (
+                    <CommonTable data={data} columns={columns} itemName="customers" pageSize={6} />
+                )}
             </div>
 
             <CreateCustomerModal show={showModal} onHide={handleClose} />
+
+            <CommonModal
+                show={showDeleteModal}
+                onHide={() => setShowDeleteModal(false)}
+                title="Delete Customer"
+            >
+                <div className={styles.modalForm}>
+                    <p style={{ fontSize: "14px", color: "#475569", marginBottom: "8px" }}>
+                        Are you sure you want to delete <strong>{customerToDelete?.name}</strong>? This action cannot be undone.
+                    </p>
+                    <div className={styles.modalFooter}>
+                        <button className={styles.cancelBtn} onClick={() => setShowDeleteModal(false)}>
+                            Cancel
+                        </button>
+                        <button className={styles.deleteConfirmBtn} onClick={handleConfirmDelete}>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </CommonModal>
         </div>
     );
 };

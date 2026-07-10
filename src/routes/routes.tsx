@@ -6,7 +6,7 @@ import FullLayout from "@/layouts/FullLayout";
 import RoleRoute from "@/layouts/RoleRoute";
 import Login from "@/features/auth/Login";
 import Setting from "@/features/setting/Setting";
-import Profile from "@/features/profile/Profile";
+// import Profile from "@/features/profile/Profile";
 import Projects from "@/features/projects/Projects";
 import Customer from "@/features/customer/Customer";
 import Task from "@/features/task/Task";
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
                             { path: "dashboard", element: <Dashboard /> },
                             { path: "projects", element: <Projects /> },
                             { path: "setting", element: <Setting /> },
-                            { path: "profile", element: <Profile /> },
+                            // { path: "profile", element: <Profile /> },
                             { path: "customer", element: <Customer /> },
                             { path: "task", element: <Task /> },
 
