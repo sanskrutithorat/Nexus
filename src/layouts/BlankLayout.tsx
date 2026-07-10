@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { useThemeStore } from "@/store/themeStore";
 
 function BlankLayout() {
-  useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    
-    // Remove dark theme to force light mode on public pages
-    document.documentElement.removeAttribute('data-theme');
+  const { theme } = useThemeStore();
 
+  useEffect(() => {
+    // Force light mode on all public pages
+    document.documentElement.removeAttribute("data-theme");
+
+    // Restore the user's preferred theme when leaving public pages
     return () => {
-      // Restore the user's theme preference when leaving the public pages
-      if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
       }
     };
-  }, []);
+  }, [theme]);
 
   return <Outlet />;
 }
