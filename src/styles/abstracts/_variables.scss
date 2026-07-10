@@ -1,48 +1,52 @@
-// NexusCRM Theme Palette - Indigo & Gray
-$primary: #4f46e5; // Indigo 600
-$secondary: #4338ca; // Indigo 700
-$accent: #6366f1; // Indigo 500
-$yellow: #f59e0b;
+// NexusCRM Theme Palette mapped to CSS Custom Properties
+$primary: var(--primary);
+$secondary: var(--secondary);
+$accent: var(--accent);
+$yellow: var(--yellow);
 
-$success: #10b981;
-$warning: #f59e0b;
-$danger: #ef4444;
+$success: var(--success);
+$warning: var(--warning);
+$danger: var(--danger);
 
-$white: #ffffff;
-$black: #111827; // Gray 900
-
-// Slate / Gray Scale
-$slate-50: #f8fafc;
-$slate-100: #f1f5f9;
-$slate-200: #e2e8f0;
-$slate-300: #cbd5e1;
-$slate-400: #94a3b8;
-$slate-500: #64748B;
-$slate-600: #475569;
-$slate-700: #334155;
-$slate-800: #1e293b;
-$slate-900: #0F172A;
+$white: var(--white);
+$black: var(--black);
 
 // Semantic Mapping
-$text-heading: $slate-900;
-$text-body: $slate-600;
-$text-muted: $slate-500;
-$bg-subtle: $slate-50;
-$bg-hover: $slate-100;
-$border-color: $slate-200;
-$body-color: $text-body; // Alias for existing components
-$muted-color: $text-muted; // Alias for existing components
-$light-bg: $slate-50; // Alias for existing components
-$cream: $slate-100; // Alias for existing components
+$text-heading: var(--text-heading);
+$text-body: var(--text-body);
+$text-muted: var(--text-muted);
+$bg-subtle: var(--bg-subtle);
+$bg-hover: var(--bg-hover);
+$border-color: var(--border-color);
+$body-color: var(--text-body); // Alias for existing components
+$muted-color: var(--text-muted); // Alias for existing components
+$light-bg: var(--bg-subtle); // Alias for existing components
+$cream: var(--bg-hover); // Alias for existing components
 
-$primary-gradient: linear-gradient(135deg,
-    #4f46e5 0%,
-    #6366f1 100%);
+// Adding semantic aliases used across components
+$bg-blue-light: var(--bg-blue-light);
+$text-blue: var(--text-blue);
 
-$hero-gradient: linear-gradient(135deg,
-    #eef2ff 0%,
-    #e0e7ff 45%,
-    #f3f4f6 100%);
+$bg-yellow-light: var(--bg-yellow-light);
+$text-yellow: var(--text-yellow);
+
+$bg-green-light: var(--bg-green-light);
+$text-green: var(--text-green);
+
+$bg-red-light: var(--bg-red-light);
+$text-red: var(--text-red);
+
+$bg-purple-light: var(--bg-purple-light);
+$text-purple: var(--text-purple);
+
+$bg-sky-light: var(--bg-sky-light);
+$text-sky: var(--text-sky);
+
+$bg-sidebar-hover: var(--bg-sidebar-hover);
+$bg-sidebar-danger-hover: var(--bg-sidebar-danger-hover);
+
+$primary-gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+$hero-gradient: linear-gradient(135deg, var(--bg-blue-light) 0%, var(--bg-subtle) 45%, var(--bg-hover) 100%);
 
 // Typography
 $font-family: "Inter", "Roboto", sans-serif;
@@ -56,22 +60,32 @@ $btn-border-radius-lg: 10px;
 
 // Cards
 $card-border-radius: 12px;
-$card-bg: #ffffff;
-$card-border-color: #e2e8f0;
+$card-bg: var(--card-bg);
+$card-bg-blur: var(--card-bg-blur);
+$card-border-color: var(--card-border-color);
 
 // Inputs
 $input-border-radius: 8px;
-$input-placeholder-color: $muted-color;
-$input-focus-border-color: #4f46e5;
-$input-focus-box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+$input-placeholder-color: var(--text-muted);
+$input-focus-border-color: var(--input-focus-border-color);
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15); // Better done via CSS vars if needed dynamically
 
-$input-border-color: #d1d5db; // Gray 300
+$input-border-color: var(--input-border-color);
 
-$tag-bg: #eef2ff;
-$tag-text: #4338ca;
+$tag-bg: var(--tag-bg);
+$tag-text: var(--tag-text);
 
-$btn-primary-bg: #4f46e5;
-$btn-primary-hover: #4338ca;
+$btn-primary-bg: var(--primary);
+$btn-primary-hover: var(--secondary);
 
-
-// @forward "variables-theme-red-yellow";
+// Maintain slate scale for backward compatibility where strictly needed, though semantic is preferred.
+$slate-50: #f8fafc;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748B;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0F172A;

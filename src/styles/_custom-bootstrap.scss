@@ -2,7 +2,7 @@
 @import "bootstrap/scss/functions";
 
 // Load your custom overrides file ($primary: red;)
-@import "./abstracts/variables";
+@import "./abstracts/bootstrap-vars";
 
 // Load the remaining core framework files in order
 @import "bootstrap/scss/variables";

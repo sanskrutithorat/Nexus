@@ -1,4 +1,5 @@
-import { HiOutlineMagnifyingGlass, HiOutlineBell } from "react-icons/hi2";
+import { HiOutlineMagnifyingGlass, HiOutlineBell, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
+import { useThemeStore } from "@/store/themeStore";
 import { Dropdown } from "react-bootstrap";
 import ProfileCard from "./profileCard/ProfileCard";
 import styles from "./Header.module.scss";
@@ -6,6 +7,7 @@ import { useMe } from "@/hooks/useAuth";
 
 const Header = () => {
   const { data: userProfile } = useMe();
+  const { theme, toggleTheme } = useThemeStore();
 
   const user = {
     first_name: userProfile?.first_name || "",
@@ -52,8 +54,17 @@ const Header = () => {
             🔥 {user.roles ? user.roles.charAt(0).toUpperCase() + user.roles.slice(1) : "User"}
           </div>
 
+          {/* Theme Toggle */}
+          <button className={styles.iconBtn} onClick={toggleTheme}>
+            {theme === 'dark' ? (
+              <HiOutlineSun size={24} color="#6b7280" />
+            ) : (
+              <HiOutlineMoon size={24} color="#6b7280" />
+            )}
+          </button>
+
           {/* Bell Icon */}
-          <button className={styles.bellBtn}>
+          <button className={styles.iconBtn}>
             <HiOutlineBell size={24} color="#6b7280" />
             <span className={styles.notificationDot}></span>
           </button>

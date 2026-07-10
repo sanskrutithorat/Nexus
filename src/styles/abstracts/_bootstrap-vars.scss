@@ -1,0 +1,15 @@
+// Base variables specifically for Bootstrap SCSS compilation.
+// Bootstrap's SCSS compiler requires actual hex/rgba values, not CSS custom properties (var(--...)),
+// for its color functions like mix(), darken(), etc.
+
+$primary: #4f46e5;
+$secondary: #4338ca;
+$success: #10b981;
+$warning: #f59e0b;
+$danger: #ef4444;
+$yellow: #f59e0b;
+
+$white: #ffffff;
+$black: #111827;
+
+$font-family-sans-serif: "Inter", "Roboto", sans-serif;

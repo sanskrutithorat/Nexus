@@ -1,4 +1,5 @@
 @use "./abstracts/variables" as *;
+@use "./base/theme";
 @use "./base/buttons";
 @use "./custom-bootstrap";
 @use "./base/global";
@@ -20,6 +21,8 @@ html, body {
 
 body {
   font-family: $font-family;
+  background-color: var(--bg-main);
+  color: var(--text-body);
 }
 
 /* Custom Soft Scrollbar */
@@ -33,10 +36,55 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba($slate-500, 0.3);
+  background: var(--scrollbar-thumb);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba($slate-500, 0.5);
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* =========================================
+   Bootstrap Overrides for Custom Theme
+========================================= */
+.modal-content {
+  background-color: var(--card-bg) !important;
+  color: var(--text-body) !important;
+  border-color: var(--border-color) !important;
+}
+
+.modal-header {
+  border-bottom-color: var(--border-color) !important;
+  
+  .btn-close {
+    /* Invert the close button in dark mode if needed, or rely on Bootstrap's data-bs-theme */
+    /* An easy way to make it visible in dark mode is to use CSS filter */
+  }
+}
+
+[data-theme="dark"] .modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.modal-footer {
+  border-top-color: var(--border-color) !important;
+}
+
+/* =========================================
+   Bootstrap Form Control Overrides
+========================================= */
+.form-control, .form-select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-heading) !important;
+  border-color: var(--input-border-color) !important;
+  
+  &:focus {
+    background-color: var(--input-bg) !important;
+    color: var(--text-heading) !important;
+    border-color: var(--input-focus-border-color) !important;
+  }
+}
+
+.form-label {
+  color: var(--text-body) !important;
 }

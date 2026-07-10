@@ -1,0 +1,122 @@
+:root {
+  /* Brand colors */
+  --primary: #4f46e5;
+  --secondary: #4338ca;
+  --accent: #6366f1;
+
+  /* Status colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --yellow: #f59e0b;
+
+  /* Base colors */
+  --white: #ffffff;
+  --black: #111827;
+
+  /* Semantic */
+  --text-heading: #0F172A;
+  --text-body: #475569;
+  --text-muted: #64748B;
+
+  --bg-main: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --bg-hover: #e2e8f0;
+
+  --border-color: #e2e8f0;
+
+  --card-bg: #ffffff;
+  --card-bg-blur: #ffffff;
+
+  --card-border-color: #e2e8f0;
+
+  --input-bg: #ffffff;
+  --input-border-color: #d1d5db;
+  --input-focus-border-color: #4f46e5;
+
+  --tag-bg: #eef2ff;
+  --tag-text: #4338ca;
+
+  /* Additional background aliases for components that were hardcoded */
+  --bg-blue-light: #eff6ff;
+  --text-blue: #3b82f6;
+
+  --bg-yellow-light: #fef3c7;
+  --text-yellow: #d97706;
+
+  --bg-green-light: #d1fae5;
+  --text-green: #059669;
+
+  --bg-red-light: #fee2e2;
+  --text-red: #ef4444;
+
+  --bg-purple-light: #f3e8ff;
+  --text-purple: #9333ea;
+
+  --bg-sky-light: #e0f2fe;
+  --text-sky: #0ea5e9;
+
+  --bg-sidebar-hover: rgba(79, 70, 229, 0.08);
+  --bg-sidebar-danger-hover: rgba(239, 68, 68, 0.08);
+
+  --scrollbar-thumb: rgba(100, 116, 139, 0.3);
+  --scrollbar-thumb-hover: rgba(100, 116, 139, 0.5);
+}
+
+[data-theme="dark"] {
+  /* Brand colors */
+  --primary: #6366f1;
+  --secondary: #4f46e5;
+  --accent: #818cf8;
+
+  /* Base colors */
+  --white: #0f172a;
+  --black: #f8fafc;
+
+  /* Semantic */
+  --text-heading: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --bg-main: #151618;
+  --bg-subtle: #000000;
+  --bg-hover: #1e293b;
+
+  --border-color: #334155;
+
+  --card-bg: #000000;
+  --card-bg-blur: #151618;
+  --card-border-color: #1e293b;
+
+  --input-bg: #0f172a;
+  --input-border-color: #475569;
+  --input-focus-border-color: #818cf8;
+
+  --tag-bg: #3730a3;
+  --tag-text: #e0e7ff;
+
+  /* Alias overrides for dark mode */
+  --bg-blue-light: #1e3a8a;
+  --text-blue: #93c5fd;
+
+  --bg-yellow-light: #78350f;
+  --text-yellow: #fde68a;
+
+  --bg-green-light: #064e3b;
+  --text-green: #6ee7b7;
+
+  --bg-red-light: #7f1d1d;
+  --text-red: #fca5a5;
+
+  --bg-purple-light: #581c87;
+  --text-purple: #d8b4fe;
+
+  --bg-sky-light: #0c4a6e;
+  --text-sky: #7dd3fc;
+
+  --bg-sidebar-hover: rgb(140 141 197 / 15%);
+  --bg-sidebar-danger-hover: rgba(248, 113, 113, 0.15);
+
+  --scrollbar-thumb: rgba(148, 163, 184, 0.2);
+  --scrollbar-thumb-hover: rgba(148, 163, 184, 0.4);
+}
