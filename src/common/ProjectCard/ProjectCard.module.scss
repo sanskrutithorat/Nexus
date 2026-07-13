@@ -17,6 +17,10 @@
     border-left: 4px solid $warning;
   }
 
+  &.statusCompleted {
+    border-left: 4px solid $success;
+  }
+
   .cardTop {
     display: flex;
     justify-content: space-between;
@@ -43,6 +47,11 @@
     &.inProgress {
       background: $bg-yellow-light;
       color: $text-yellow;
+    }
+
+    &.completed {
+      background: $bg-green-light;
+      color: $text-green;
     }
   }
 

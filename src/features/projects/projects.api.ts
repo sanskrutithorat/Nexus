@@ -5,6 +5,8 @@ export interface GetProjectParams {
   search?: string;
   ordering?: string;
   page?: number;
+  status?: string;
+  customer?: number;
 }
 
 export interface Project {
@@ -52,6 +54,14 @@ export const getProjectDetails = async (id: number): Promise<Project> => {
 export const createProject = async (data: Partial<Project>): Promise<Project> => {
   const response = await privateApi.post(
     API_ENDPOINTS.PROJECT.PROJECTS,
+    data
+  );
+  return response.data.data;
+};
+
+export const updateProject = async (id: number, data: Partial<Project>): Promise<Project> => {
+  const response = await privateApi.patch(
+    `${API_ENDPOINTS.PROJECT.PROJECTS}${id}/`,
     data
   );
   return response.data.data;

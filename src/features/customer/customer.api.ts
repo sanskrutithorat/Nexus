@@ -5,6 +5,8 @@ export interface GetCustomersParams {
     search?: string;
     ordering?: string;
     page?: number;
+    company_name__icontains?: string;
+    projects?: number;
 }
 
 export interface Customer {

@@ -5,19 +5,39 @@ import CreateCustomerModal from "./CreateCustomerModal";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2, Download, Plus } from "lucide-react";
 import { useGetCustomers, useDeleteCustomer } from "@/hooks/useCustomers";
+import { useGetProjects } from "@/hooks/useProjects";
+import { useDebounce } from "@/hooks/useDebounce";
 import type { Customer as CustomerType } from "@/features/customer/customer.api";
 import styles from "./Customer.module.scss";
+import modalStyles from "@/common/CommonModal.module.scss";
 
 const Customer = () => {
-    const { data: customerData, isLoading, isError } = useGetCustomers();
+    const [companyNameFilter, setCompanyNameFilter] = useState<string>('');
+    const [projectFilter, setProjectFilter] = useState<string>('');
+    const debouncedCompanyName = useDebounce(companyNameFilter, 500);
+
+    const { data: customerData, isLoading, isError } = useGetCustomers({
+        company_name__icontains: debouncedCompanyName ? debouncedCompanyName : undefined,
+        projects: projectFilter ? Number(projectFilter) : undefined,
+    });
+    const { data: projectData } = useGetProjects();
     const deleteCustomerMutation = useDeleteCustomer();
 
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [customerToDelete, setCustomerToDelete] = useState<CustomerType | null>(null);
+    const [customerToEdit, setCustomerToEdit] = useState<CustomerType | null>(null);
 
     const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    const handleShow = () => {
+        setCustomerToEdit(null);
+        setShowModal(true);
+    };
+
+    const handleEditClick = (customer: CustomerType) => {
+        setCustomerToEdit(customer);
+        setShowModal(true);
+    };
 
     const handleDeleteClick = (customer: CustomerType) => {
         setCustomerToDelete(customer);
@@ -90,7 +110,7 @@ const Customer = () => {
             cell: ({ row }) => (
                 <div className={styles.actionsContainer}>
                     <button
-                        onClick={() => console.log("Edit", row.original)}
+                        onClick={() => handleEditClick(row.original)}
                         className={`${styles.actionBtn} ${styles.editBtn}`}
                     >
                         <Pencil size={18} />
@@ -129,16 +149,30 @@ const Customer = () => {
             <div className={styles.filterRow}>
                 <div className={styles.filterLeft}>
                     <div className={styles.filterGroup}>
-                        <span className={styles.filterLabel}>Organization:</span>
-                        <button className={styles.filterSelect}>
-                            All Organizations
-                        </button>
+                        <span className={styles.filterLabel}>Company Name:</span>
+                        <input 
+                            type="text"
+                            className={styles.filterSelect}
+                            placeholder="All Companies"
+                            value={companyNameFilter}
+                            onChange={(e) => setCompanyNameFilter(e.target.value)}
+                            style={{ width: '150px' }}
+                        />
                     </div>
                     <div className={styles.filterGroup}>
-                        <span className={styles.filterLabel}>Status:</span>
-                        <button className={styles.filterSelect}>
-                            All Statuses
-                        </button>
+                        <span className={styles.filterLabel}>Project:</span>
+                        <select 
+                            className={styles.filterSelect}
+                            value={projectFilter}
+                            onChange={(e) => setProjectFilter(e.target.value)}
+                        >
+                            <option value="">All Projects</option>
+                            {projectData?.results?.map((project: any) => (
+                                <option key={project.id} value={project.id}>
+                                    {project.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
                 <div className={styles.filterRight}>
@@ -156,23 +190,23 @@ const Customer = () => {
                 )}
             </div>
 
-            <CreateCustomerModal show={showModal} onHide={handleClose} />
+            <CreateCustomerModal show={showModal} onHide={handleClose} customer={customerToEdit} />
 
             <CommonModal
                 show={showDeleteModal}
                 onHide={() => setShowDeleteModal(false)}
                 title="Delete Customer"
             >
-                <div className={styles.modalForm}>
+                <div className={modalStyles.modalForm}>
                     <p style={{ fontSize: "14px", color: "#475569", marginBottom: "8px" }}>
                         Are you sure you want to delete <strong>{customerToDelete?.name}</strong>? This action cannot be undone.
                     </p>
-                    <div className={styles.modalFooter}>
-                        <button className={styles.cancelBtn} onClick={() => setShowDeleteModal(false)}>
+                    <div className={modalStyles.modalFooter}>
+                        <button className={modalStyles.cancelBtn} onClick={() => setShowDeleteModal(false)} disabled={deleteCustomerMutation.isPending}>
                             Cancel
                         </button>
-                        <button className={styles.deleteConfirmBtn} onClick={handleConfirmDelete}>
-                            Delete
+                        <button className={modalStyles.deleteBtn} onClick={handleConfirmDelete} disabled={deleteCustomerMutation.isPending}>
+                            {deleteCustomerMutation.isPending ? "Deleting..." : "Delete"}
                         </button>
                     </div>
                 </div>

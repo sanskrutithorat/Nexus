@@ -5,12 +5,33 @@ import styles from "./Projects.module.scss";
 import ProjectCard from "@/common/ProjectCard/ProjectCard";
 import CreateProjectModal from "./CreateProjectModal";
 import { useGetProjects } from "@/hooks/useProjects";
+import { useGetCustomers } from "@/hooks/useCustomers";
 
 const Projects = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const { data: ProjectData, isLoading, isError } = useGetProjects();
+  const [projectToEdit, setProjectToEdit] = useState<any>(null);
+
+  const [statusFilter, setStatusFilter] = useState<string>('');
+  const [customerFilter, setCustomerFilter] = useState<string>('');
+
+  const { data: ProjectData, isLoading, isError } = useGetProjects({
+    status: statusFilter || undefined,
+    customer: customerFilter ? Number(customerFilter) : undefined,
+  });
+
+  const { data: customersData } = useGetCustomers();
 
   const data: any = ProjectData?.results || [];
+
+  const handleShowCreate = () => {
+    setProjectToEdit(null);
+    setShowCreateModal(true);
+  };
+
+  const handleEditProject = (project: any) => {
+    setProjectToEdit(project);
+    setShowCreateModal(true);
+  };
 
   useEffect(() => {
     console.log(data);
@@ -26,7 +47,7 @@ const Projects = () => {
           <p className={styles.pageSubtitle}>Monitor project deliverables, currency budgets, and timelines</p>
         </div>
         <div className={styles.headerRight}>
-          <button className={styles.addBtn} onClick={() => setShowCreateModal(true)}>
+          <button className={styles.addBtn} onClick={handleShowCreate}>
             <Plus size={16} />
             Create Project
           </button>
@@ -74,20 +95,36 @@ const Projects = () => {
       <div className={styles.filterRow}>
         <div className={styles.filterLeft}>
           <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Organization:</span>
-            <button className={styles.filterSelect}>
-              All Organizations
-            </button>
+            <span className={styles.filterLabel}>Customer:</span>
+            <select 
+              className={styles.filterSelect}
+              value={customerFilter}
+              onChange={(e) => setCustomerFilter(e.target.value)}
+            >
+              <option value="">All Customers</option>
+              {customersData?.results?.map((customer: any) => (
+                <option key={customer.id} value={customer.id}>
+                  {customer.name} {customer.company_name ? `(${customer.company_name})` : ''}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Status:</span>
-            <button className={styles.filterSelect}>
-              All Statuses
-            </button>
+            <select 
+              className={styles.filterSelect}
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">All Statuses</option>
+              <option value="new">New</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
           </div>
         </div>
         <div className={styles.filterRight}>
-          Showing 1 - 6 of customers
+          Showing {data.length > 0 ? 1 : 0} - {data.length} of {ProjectData?.count || 0} projects
         </div>
       </div>
 
@@ -99,12 +136,13 @@ const Projects = () => {
                 key={project.id}
                 id={project.id}
                 status={project.status}
-                budget="$1,200,000"
+                budget={`$${project.budget}`}
                 title={project.name}
                 subtitle={project.description}
                 client={project.customer.name}
                 startDate={project.start_date}
                 endDate={project.end_date}
+                onEdit={() => handleEditProject(project)}
               />
             ))
           ) : (
@@ -112,16 +150,6 @@ const Projects = () => {
               <p>No projects found</p>
             </div>
           )}
-          <ProjectCard
-            id="PRJ-108"
-            status="In Progress"
-            budget="$1,200,000"
-            title="Arc Reactor Power Network"
-            subtitle="Deploying clean fusion energy microgrids across metropolitan distribution centers."
-            client="Stark Industries"
-            startDate="Nov 01, 2024"
-            endDate="Dec 15, 2025"
-          />
           {/* <ProjectCard
             id="PRJ-204"
             status="NEW"
@@ -256,7 +284,7 @@ const Projects = () => {
       </div>
 
       {showCreateModal && (
-        <CreateProjectModal show={showCreateModal} onHide={() => setShowCreateModal(false)} />
+        <CreateProjectModal show={showCreateModal} onHide={() => setShowCreateModal(false)} project={projectToEdit} />
       )}
     </div>
   );

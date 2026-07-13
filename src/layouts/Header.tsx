@@ -35,7 +35,7 @@ const Header = () => {
         {/* RIGHT */}
         <div className={styles.right}>
           {/* Role Preview */}
-          <div className={styles.rolePreview}>
+          {/* <div className={styles.rolePreview}>
             <span className={styles.roleLabel}>Role Preview:</span>
             <button className={`${styles.roleBtn} ${user.roles?.toLowerCase() === 'admin' ? styles.roleActive : ''}`}>
               👑 Admin
@@ -46,12 +46,12 @@ const Header = () => {
             <button className={`${styles.roleBtn} ${user.roles?.toLowerCase() === 'viewer' ? styles.roleActive : ''}`}>
               👁️ Viewer
             </button>
-          </div>
+          </div> */}
 
           {/* Role Badge */}
           <div className={styles.adminBadge}>
             <span className={styles.dot}></span>
-            🔥 {user.roles ? user.roles.charAt(0).toUpperCase() + user.roles.slice(1) : "User"}
+            {user.roles ? user.roles.charAt(0).toUpperCase() + user.roles.slice(1) : "User"}
           </div>
 
           {/* Theme Toggle */}

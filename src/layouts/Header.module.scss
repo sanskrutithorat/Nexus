@@ -5,11 +5,12 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: $white;
+  background: $card-bg;
   // border-bottom: 1px solid $border-color;
   display: flex;
   align-items: center;
-  box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.10196784);
+  // box-shadow: 0px 5px 6px -5px rgba(0, 0, 0, 0.10196784);
+  box-shadow: 0px 5px 6px -5px rgb(215 206 206 / 49%);
 }
 
 .container {
@@ -133,7 +134,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: $primary;
+    background: $success;
   }
 }
 

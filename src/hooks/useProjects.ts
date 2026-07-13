@@ -4,9 +4,9 @@ import {
     createProject,
     getallProject,
     getProjectDetails,
+    updateProject,
     type GetProjectParams,
     type Project,
-    // type Project,
 } from "@/features/projects/projects.api";
 
 export const useGetProjects = (params?: GetProjectParams) => {
@@ -32,6 +32,19 @@ export const useCreateProject = () => {
         mutationFn: (data: Partial<Project>) => createProject(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["projects"] });
+        },
+    });
+};
+
+export const useUpdateProject = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, data }: { id: number; data: Partial<Project> }) =>
+            updateProject(id, data),
+        onSuccess: (_, variables) => {
+            queryClient.invalidateQueries({ queryKey: ["projects"] });
+            queryClient.invalidateQueries({ queryKey: ["projectDetails", variables.id] });
         },
     });
 };
