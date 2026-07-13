@@ -3,7 +3,7 @@
 .kpicard {
     flex: 1;
     min-width: 220px;
-    background: #fff;
+    background: $card-bg-blur;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
@@ -51,7 +51,7 @@
     font-weight: 500;
 
     &.positive {
-        color: #10b981;
+        color: $success;
     }
 
     &.neutral {
@@ -59,7 +59,7 @@
     }
 
     &.negative {
-        color: #ef4444;
+        color: $danger;
     }
 }
 

@@ -137,13 +137,13 @@
   }
 }
 
-.bellBtn {
+.iconBtn {
   position: relative;
   width: 40px;
   height: 40px;
   border: 1px solid $border-color;
   border-radius: 50%;
-  background: $white;
+  background: $card-bg;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,7 +163,7 @@
   height: 8px;
   border-radius: 50%;
   background: $danger;
-  border: 2px solid $white;
+  border: 2px solid $card-bg;
 }
 
 .avatarBtn {

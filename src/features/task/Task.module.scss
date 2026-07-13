@@ -64,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: $white;
+    background: var(--bg-main);
     border: 1px solid $border-color;
     border-radius: 12px;
     padding: 12px 24px;
@@ -134,7 +134,7 @@
     min-width: 320px;
     width: 100%;
     // max-width: 320px;
-    background: #f8fafc;
+    background: $bg-subtle;
     border-radius: 12px;
     border: 1px solid $border-color;
     height: 100%;
@@ -157,15 +157,15 @@
                 border-radius: 50%;
 
                 &.todo {
-                    background: #f59e0b;
+                    background: $warning;
                 }
 
                 &.inProgress {
-                    background: #3b82f6;
+                    background: $text-blue;
                 }
 
                 &.done {
-                    background: #10b981;
+                    background: $success;
                 }
             }
 
@@ -178,7 +178,7 @@
             }
 
             .taskCount {
-                background: #e2e8f0;
+                background: $bg-hover;
                 color: $text-muted;
                 font-size: 12px;
                 font-weight: 600;
@@ -199,7 +199,7 @@
             justify-content: center;
 
             &:hover {
-                background: #e2e8f0;
+                background: $bg-hover;
                 color: $text-heading;
             }
         }
@@ -220,14 +220,14 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: var(--scrollbar-thumb);
             border-radius: 4px;
         }
     }
 }
 
 .taskCard {
-    background: $white;
+    background: $card-bg-blur;
     border-radius: 10px;
     padding: 16px;
     border: 1px solid $border-color;
@@ -241,7 +241,7 @@
     &:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        border-color: #cbd5e1;
+        border-color: var(--scrollbar-thumb-hover);
     }
 
     &:active {
@@ -261,18 +261,18 @@
             letter-spacing: 0.5px;
 
             &.high {
-                background: #fee2e2;
-                color: #ef4444;
+                background: $bg-red-light;
+                color: $text-red;
             }
 
             &.medium {
-                background: #fef3c7;
-                color: #f59e0b;
+                background: $bg-yellow-light;
+                color: $text-yellow;
             }
 
             &.low {
-                background: #e0f2fe;
-                color: #0ea5e9;
+                background: $bg-sky-light;
+                color: $text-sky;
             }
         }
     }
@@ -342,7 +342,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 11px 16px;
-    background: $white;
+    // background: $white;
+    background: var(--bg-main);
     border-top: 1px solid $border-color;
     font-family: "Inter", sans-serif;
     color: $text-muted;

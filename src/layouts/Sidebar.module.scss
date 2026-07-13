@@ -3,7 +3,7 @@
 .sidebar {
   flex-shrink: 0;
   height: 100vh;
-  background: $white;
+  background: $card-bg;
   z-index: 1300;
   border-right: 1px solid $border-color;
   transition: width 0.3s ease;
@@ -131,7 +131,7 @@
 }
 
 .active {
-  background: rgba($primary, 0.08);
+  background: $bg-sidebar-hover;
   color: $primary;
 
   svg {
@@ -158,7 +158,7 @@
   border: none;
   border-radius: 12px;
   padding: 12px;
-  background: rgba($danger, 0.08);
+  background: $bg-sidebar-danger-hover;
   color: $danger;
   font-weight: 600;
   cursor: pointer;
@@ -170,6 +170,7 @@
   overflow: hidden;
 
   &:hover {
-    background: rgba($danger, 0.15);
+    background: $bg-sidebar-danger-hover;
+    opacity: 0.8;
   }
 }
