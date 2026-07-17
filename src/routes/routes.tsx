@@ -11,6 +11,7 @@ import Projects from "@/features/projects/Projects";
 import Customer from "@/features/customer/Customer";
 import Task from "@/features/task/Task";
 import Register from "@/features/register/Register";
+import Members from "@/features/members/Members";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +46,7 @@ export const router = createBrowserRouter([
                             // { path: "profile", element: <Profile /> },
                             { path: "customer", element: <Customer /> },
                             { path: "task", element: <Task /> },
+                            { path: "members", element: <Members /> },
 
                         ],
                     },

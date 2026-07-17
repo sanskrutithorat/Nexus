@@ -8,7 +8,8 @@ import {
   HiOutlineUsers,
   HiOutlineClipboardDocumentList,
   HiOutlineFolder,
-  HiOutlineArrowRightOnRectangle
+  HiOutlineArrowRightOnRectangle,
+  HiOutlineUserGroup
 } from "react-icons/hi2";
 import Nexuslogo from "@/assets/logo/Background.svg";
 
@@ -47,6 +48,15 @@ const Sidebar = () => {
           <HiOutlineUsers size={24} className={styles.icon} />
           <span className={styles.linkText}>Customer</span>
         </NavLink>
+        <NavLink
+          to="/projects"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <HiOutlineFolder size={24} className={styles.icon} />
+          <span className={styles.linkText}>Projects</span>
+        </NavLink>
 
         <NavLink
           to="/task"
@@ -57,16 +67,16 @@ const Sidebar = () => {
           <HiOutlineClipboardDocumentList size={24} className={styles.icon} />
           <span className={styles.linkText}>Task</span>
         </NavLink>
-
         <NavLink
-          to="/projects"
+          to="/members"
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
-          <HiOutlineFolder size={24} className={styles.icon} />
-          <span className={styles.linkText}>Projects</span>
+          <HiOutlineUserGroup size={24} className={styles.icon} />
+          <span className={styles.linkText}>Members</span>
         </NavLink>
+
 
         {/* <NavLink
           to="/profile"
