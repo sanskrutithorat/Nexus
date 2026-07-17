@@ -1,480 +1,274 @@
-import { Plus, MoreHorizontal, Clock, MessageSquare, Paperclip, ArrowLeft, ArrowRight } from "react-feather";
-import styles from "./Task.module.scss"
+import { useState } from "react";
+import {
+  Plus,
+  Clock,
+  ArrowLeft,
+  ArrowRight,
+  Edit2,
+  Trash2,
+  ChevronRight,
+  ChevronLeft
+} from "react-feather";
+import styles from "./Task.module.scss";
+import type { Task as ITask } from "./task.api";
+import { useGetTasks, useUpdateTask, useDeleteTask } from "@/hooks/useTasks";
+import CreateTaskModal from "./CreateTaskModal";
+import CommonModal from "@/common/CommonModal";
+import modalStyles from "@/common/CommonModal.module.scss";
 
 const Task = () => {
-    return (
-        <div className={styles.taskPage}>
-            <div className={styles.pageHeader}>
-                <div className={styles.headerLeft}>
-                    <h1 className={styles.pageTitle}>Task Dashboard</h1>
-                    <p className={styles.pageSubtitle}>Kanban workflow tracking and task management</p>
-                </div>
-                <div className={styles.headerRight}>
-                    <button className={styles.addBtn} >
-                        <Plus size={16} />
-                        Create Task
-                    </button>
-                </div>
-            </div>
+  const [page, setPage] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<ITask | undefined>(undefined);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState<ITask | null>(null);
 
-            <div className={styles.filterRow}>
-                <div className={styles.filterLeft}>
-                    <div className={styles.filterGroup}>
-                        <span className={styles.filterLabel}>Project:</span>
-                        <button className={styles.filterSelect}>
-                            All Projects
-                        </button>
-                    </div>
-                    <div className={styles.filterGroup}>
-                        <span className={styles.filterLabel}>Assignee:</span>
-                        <button className={styles.filterSelect}>
-                            All Assignees
-                        </button>
-                    </div>
-                    <div className={styles.filterGroup}>
-                        <span className={styles.filterLabel}>Priority:</span>
-                        <button className={styles.filterSelect}>
-                            All Priorities
-                        </button>
-                    </div>
-                </div>
-                <div className={styles.filterRight}>
-                    Showing 5 active tasks
-                </div>
-            </div>
+  const { data, isLoading } = useGetTasks({ page });
+  const { mutate: updateTask } = useUpdateTask();
+  const { mutate: deleteTask, isPending: isDeleting } = useDeleteTask();
 
-            <div className={styles.taskBoard}>
-                {/* TODO Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.todo}`}></div>
-                            <h4>To Do</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
+  const tasks = data?.results || [];
+  const totalCount = data?.count || 0;
 
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Design System Update</h5>
-                            <p className={styles.cardDesc}>Update the core component library to match the new branding guidelines.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 24</span></div>
-                                    <div className={styles.metaItem}><MessageSquare size={14} /><span>3</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
+  const todoTasks = tasks.filter((t) => t.status === "todo");
+  const inProgressTasks = tasks.filter((t) => t.status === "in_progress");
+  const completedTasks = tasks.filter((t) => t.status === "completed");
 
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>User Research Analysis</h5>
-                            <p className={styles.cardDesc}>Compile notes from the Q3 user interviews and create a summary deck.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 28</span></div>
-                                    <div className={styles.metaItem}><Paperclip size={14} /><span>2</span></div>
-                                </div>
-                                <div className={styles.avatar}>AM</div>
-                            </div>
-                        </div>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Design System Update</h5>
-                            <p className={styles.cardDesc}>Update the core component library to match the new branding guidelines.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 24</span></div>
-                                    <div className={styles.metaItem}><MessageSquare size={14} /><span>3</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
+  const handleCreate = () => {
+    setSelectedTask(undefined);
+    setShowModal(true);
+  };
 
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>User Research Analysis</h5>
-                            <p className={styles.cardDesc}>Compile notes from the Q3 user interviews and create a summary deck.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 28</span></div>
-                                    <div className={styles.metaItem}><Paperclip size={14} /><span>2</span></div>
-                                </div>
-                                <div className={styles.avatar}>AM</div>
-                            </div>
-                        </div>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Design System Update</h5>
-                            <p className={styles.cardDesc}>Update the core component library to match the new branding guidelines.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 24</span></div>
-                                    <div className={styles.metaItem}><MessageSquare size={14} /><span>3</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
+  const handleEdit = (task: ITask) => {
+    setSelectedTask(task);
+    setShowModal(true);
+  };
 
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>User Research Analysis</h5>
-                            <p className={styles.cardDesc}>Compile notes from the Q3 user interviews and create a summary deck.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 28</span></div>
-                                    <div className={styles.metaItem}><Paperclip size={14} /><span>2</span></div>
-                                </div>
-                                <div className={styles.avatar}>AM</div>
-                            </div>
-                        </div>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Design System Update</h5>
-                            <p className={styles.cardDesc}>Update the core component library to match the new branding guidelines.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 24</span></div>
-                                    <div className={styles.metaItem}><MessageSquare size={14} /><span>3</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
+  const handleDelete = (task: ITask) => {
+    setTaskToDelete(task);
+    setShowDeleteModal(true);
+  };
 
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>User Research Analysis</h5>
-                            <p className={styles.cardDesc}>Compile notes from the Q3 user interviews and create a summary deck.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 28</span></div>
-                                    <div className={styles.metaItem}><Paperclip size={14} /><span>2</span></div>
-                                </div>
-                                <div className={styles.avatar}>AM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  const handleConfirmDelete = () => {
+    if (taskToDelete) {
+      deleteTask(taskToDelete.id, {
+        onSuccess: () => {
+          setShowDeleteModal(false);
+          setTaskToDelete(null);
+        }
+      });
+    }
+  };
 
-                {/* IN PROGRESS Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.inProgress}`}></div>
-                            <h4>In Progress</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
+  const changeStatus = (task: ITask, newStatus: "todo" | "in_progress" | "completed") => {
+    updateTask({ id: task.id, data: { status: newStatus } });
+  };
 
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Backend API Migration</h5>
-                            <p className={styles.cardDesc}>Migrate the legacy endpoints to the new GraphQL architecture.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 25</span></div>
-                                </div>
-                                <div className={styles.avatar}>SW</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.low}`}>Low Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Update Documentation</h5>
-                            <p className={styles.cardDesc}>Add missing JSDoc comments to the core utility functions.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Nov 02</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                {/* IN PROGRESS Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.inProgress}`}></div>
-                            <h4>In Progress</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Backend API Migration</h5>
-                            <p className={styles.cardDesc}>Migrate the legacy endpoints to the new GraphQL architecture.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 25</span></div>
-                                </div>
-                                <div className={styles.avatar}>SW</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.low}`}>Low Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Update Documentation</h5>
-                            <p className={styles.cardDesc}>Add missing JSDoc comments to the core utility functions.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Nov 02</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* IN PROGRESS Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.inProgress}`}></div>
-                            <h4>In Progress</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Backend API Migration</h5>
-                            <p className={styles.cardDesc}>Migrate the legacy endpoints to the new GraphQL architecture.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 25</span></div>
-                                </div>
-                                <div className={styles.avatar}>SW</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.low}`}>Low Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Update Documentation</h5>
-                            <p className={styles.cardDesc}>Add missing JSDoc comments to the core utility functions.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Nov 02</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* IN PROGRESS Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.inProgress}`}></div>
-                            <h4>In Progress</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Backend API Migration</h5>
-                            <p className={styles.cardDesc}>Migrate the legacy endpoints to the new GraphQL architecture.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 25</span></div>
-                                </div>
-                                <div className={styles.avatar}>SW</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.low}`}>Low Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Update Documentation</h5>
-                            <p className={styles.cardDesc}>Add missing JSDoc comments to the core utility functions.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Nov 02</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* IN PROGRESS Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.inProgress}`}></div>
-                            <h4>In Progress</h4>
-                            <span className={styles.taskCount}>2</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.high}`}>High Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Backend API Migration</h5>
-                            <p className={styles.cardDesc}>Migrate the legacy endpoints to the new GraphQL architecture.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 25</span></div>
-                                </div>
-                                <div className={styles.avatar}>SW</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.low}`}>Low Priority</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Update Documentation</h5>
-                            <p className={styles.cardDesc}>Add missing JSDoc comments to the core utility functions.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Nov 02</span></div>
-                                </div>
-                                <div className={styles.avatar}>JD</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* DONE Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.done}`}></div>
-                            <h4>Completed</h4>
-                            <span className={styles.taskCount}>1</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Authentication Flow</h5>
-                            <p className={styles.cardDesc}>Implement OAuth2 login with Google and GitHub providers.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 20</span></div>
-                                </div>
-                                <div className={styles.avatar}>TR</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Cancelled Column */}
-                <div className={styles.taskColumn}>
-                    <div className={styles.columnHeader}>
-                        <div className={styles.headerTitle}>
-                            <div className={`${styles.statusDot} ${styles.done}`}></div>
-                            <h4>Cancelled</h4>
-                            <span className={styles.taskCount}>1</span>
-                        </div>
-                        <button className={styles.moreBtn}><MoreHorizontal size={16} /></button>
-                    </div>
-
-                    <div className={styles.taskList}>
-                        <div className={styles.taskCard}>
-                            <div className={styles.cardLabels}>
-                                <span className={`${styles.label} ${styles.medium}`}>Medium</span>
-                            </div>
-                            <h5 className={styles.cardTitle}>Authentication Flow</h5>
-                            <p className={styles.cardDesc}>Implement OAuth2 login with Google and GitHub providers.</p>
-                            <div className={styles.cardFooter}>
-                                <div className={styles.footerLeft}>
-                                    <div className={styles.metaItem}><Clock size={14} /><span>Oct 20</span></div>
-                                </div>
-                                <div className={styles.avatar}>TR</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div className={styles.paginationFooter}>
-                <div className={styles.paginationInfo}>
-                    Showing 1 to 3 of 100 items
-                </div>
-
-                <div className={styles.paginationControls}>
-                    <span className={styles.pageText}>
-                        Page 1 of 3
-                    </span>
-
-                    <button
-                        className={styles.paginationBtn}
-                    // onClick={() => table.previousPage()}
-                    // disabled={!table.getCanPreviousPage()}
-                    >
-                        <ArrowLeft size={16} />
-                        Previous
-                    </button>
-
-                    <button
-                        className={styles.paginationBtn}
-                    // onClick={() => table.nextPage()}
-                    // disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                        <ArrowRight size={16} />
-                    </button>
-                </div>
-            </div>
+  const renderTaskCard = (task: ITask) => (
+    <div key={task.id} className={styles.taskCard}>
+      <div className={styles.cardLabels}>
+        <span className={`${styles.label} ${styles.medium}`}>
+          {task.project && typeof task.project === 'object' ? task.project.name : 'Task'}
+        </span>
+        <div className={styles.cardActions}>
+          <button 
+            className={`${styles.actionBtn} ${styles.editBtn}`}
+            onClick={() => handleEdit(task)}
+            title="Edit Task"
+          >
+            <Edit2 size={14} />
+          </button>
+          <button 
+            className={`${styles.actionBtn} ${styles.deleteBtn}`}
+            onClick={() => handleDelete(task)}
+            title="Delete Task"
+          >
+            <Trash2 size={14} />
+          </button>
         </div>
-    )
-}
+      </div>
+      <h5 className={styles.cardTitle}>{task.title}</h5>
+      <p className={styles.cardDesc}>{task.description}</p>
+      
+      <div className={styles.cardFooter}>
+        <div className={styles.footerLeft}>
+          <div className={styles.metaItem}>
+            <Clock size={14} />
+            <span>{task.due_date ? new Date(task.due_date).toLocaleDateString() : "No Date"}</span>
+          </div>
+        </div>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className={styles.statusActions}>
+            {task.status !== 'todo' && (
+              <button 
+                title="Move to Previous Status"
+                className={styles.statusBtn}
+                onClick={() => changeStatus(task, task.status === 'completed' ? 'in_progress' : 'todo')}
+              >
+                <ChevronLeft size={14} />
+              </button>
+            )}
+            {task.status !== 'completed' && (
+              <button 
+                title="Move to Next Status"
+                className={styles.statusBtn}
+                onClick={() => changeStatus(task, task.status === 'todo' ? 'in_progress' : 'completed')}
+              >
+                <ChevronRight size={14} />
+              </button>
+            )}
+          </div>
+          <div className={styles.avatar}>
+            {task.assigned_to && typeof task.assigned_to === 'object' && task.assigned_to.username
+              ? task.assigned_to.username.charAt(0).toUpperCase()
+              : task.assigned_to
+              ? `U${typeof task.assigned_to === 'object' ? task.assigned_to.id : task.assigned_to}`
+              : "Un"}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={styles.taskPage}>
+      <div className={styles.pageHeader}>
+        <div className={styles.headerLeft}>
+          <h1 className={styles.pageTitle}>Task Dashboard</h1>
+          <p className={styles.pageSubtitle}>
+            Kanban workflow tracking and task management
+          </p>
+        </div>
+        <div className={styles.headerRight}>
+          <button className={styles.addBtn} onClick={handleCreate}>
+            <Plus size={16} />
+            Create Task
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.filterRow}>
+        <div className={styles.filterLeft}>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Project:</span>
+            <button className={styles.filterSelect}>All Projects</button>
+          </div>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Assignee:</span>
+            <button className={styles.filterSelect}>All Assignees</button>
+          </div>
+        </div>
+        <div className={styles.filterRight}>
+          Showing {totalCount} active tasks
+        </div>
+      </div>
+
+      {isLoading ? (
+        <div style={{ padding: "20px" }}>Loading tasks...</div>
+      ) : (
+        <div className={styles.taskBoard}>
+          {/* TODO Column */}
+          <div className={styles.taskColumn}>
+            <div className={styles.columnHeader}>
+              <div className={styles.headerTitle}>
+                <div className={`${styles.statusDot} ${styles.todo}`}></div>
+                <h4>To Do</h4>
+                <span className={styles.taskCount}>{todoTasks.length}</span>
+              </div>
+            </div>
+            <div className={styles.taskList}>
+              {todoTasks.map(renderTaskCard)}
+            </div>
+          </div>
+
+          {/* IN PROGRESS Column */}
+          <div className={styles.taskColumn}>
+            <div className={styles.columnHeader}>
+              <div className={styles.headerTitle}>
+                <div
+                  className={`${styles.statusDot} ${styles.inProgress}`}
+                ></div>
+                <h4>In Progress</h4>
+                <span className={styles.taskCount}>
+                  {inProgressTasks.length}
+                </span>
+              </div>
+            </div>
+            <div className={styles.taskList}>
+              {inProgressTasks.map(renderTaskCard)}
+            </div>
+          </div>
+
+          {/* COMPLETED Column */}
+          <div className={styles.taskColumn}>
+            <div className={styles.columnHeader}>
+              <div className={styles.headerTitle}>
+                <div className={`${styles.statusDot} ${styles.done}`}></div>
+                <h4>Completed</h4>
+                <span className={styles.taskCount}>{completedTasks.length}</span>
+              </div>
+            </div>
+            <div className={styles.taskList}>
+              {completedTasks.map(renderTaskCard)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className={styles.paginationFooter}>
+        <div className={styles.paginationInfo}>
+          Total items: {totalCount}
+        </div>
+
+        <div className={styles.paginationControls}>
+          <span className={styles.pageText}>Page {page}</span>
+          <button
+            className={styles.paginationBtn}
+            onClick={() => setPage(Math.max(1, page - 1))}
+            disabled={page === 1}
+          >
+            <ArrowLeft size={16} />
+            Previous
+          </button>
+          <button
+            className={styles.paginationBtn}
+            onClick={() => setPage(page + 1)}
+            disabled={tasks.length < 30}
+          >
+            Next
+            <ArrowRight size={16} />
+          </button>
+        </div>
+      </div>
+
+      <CreateTaskModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        task={selectedTask}
+      />
+
+      <CommonModal
+        show={showDeleteModal}
+        onHide={() => setShowDeleteModal(false)}
+        title="Delete Task"
+      >
+        <div className={modalStyles.modalForm}>
+          <p style={{ fontSize: "14px", color: "#475569", marginBottom: "8px" }}>
+            Are you sure you want to delete <strong>{taskToDelete?.title}</strong>? This action cannot be undone.
+          </p>
+          <div className={modalStyles.modalFooter}>
+            <button className={modalStyles.cancelBtn} onClick={() => setShowDeleteModal(false)} disabled={isDeleting}>
+              Cancel
+            </button>
+            <button className={modalStyles.deleteBtn} onClick={handleConfirmDelete} disabled={isDeleting}>
+              {isDeleting ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
+      </CommonModal>
+    </div>
+  );
+};
+
 export default Task;

@@ -11,5 +11,11 @@ export const API_ENDPOINTS = {
   PROJECT: {
     PROJECTS: "api/projects/",
 
+  },
+  TASK: {
+    TASKS: "api/tasks/",
+  },
+  USER: {
+    USERS: "api/users/",
   }
 } as const;
