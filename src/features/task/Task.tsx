@@ -12,6 +12,8 @@ import {
 import styles from "./Task.module.scss";
 import type { Task as ITask } from "./task.api";
 import { useGetTasks, useUpdateTask, useDeleteTask } from "@/hooks/useTasks";
+import { useGetProjects } from "@/hooks/useProjects";
+import { useGetUsers } from "@/hooks/useUsers";
 import CreateTaskModal from "./CreateTaskModal";
 import CommonModal from "@/common/CommonModal";
 import modalStyles from "@/common/CommonModal.module.scss";
@@ -22,8 +24,18 @@ const Task = () => {
   const [selectedTask, setSelectedTask] = useState<ITask | undefined>(undefined);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<ITask | null>(null);
+  const [projectFilter, setProjectFilter] = useState<string>('');
+  const [assigneeFilter, setAssigneeFilter] = useState<string>('');
 
-  const { data, isLoading } = useGetTasks({ page });
+  const { data, isLoading } = useGetTasks({ 
+    page,
+    project: projectFilter ? Number(projectFilter) : undefined,
+    assigned_to: assigneeFilter ? Number(assigneeFilter) : undefined
+  });
+  
+  const { data: projectsData } = useGetProjects({ page: 1, page_size: 100 });
+  const { data: usersData } = useGetUsers();
+
   const { mutate: updateTask } = useUpdateTask();
   const { mutate: deleteTask, isPending: isDeleting } = useDeleteTask();
 
@@ -152,11 +164,31 @@ const Task = () => {
         <div className={styles.filterLeft}>
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Project:</span>
-            <button className={styles.filterSelect}>All Projects</button>
+            <select 
+              className={styles.filterSelect}
+              value={projectFilter}
+              onChange={(e) => setProjectFilter(e.target.value)}
+            >
+              <option value="">All Projects</option>
+              {projectsData?.results?.map((p: any) => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
+            </select>
           </div>
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Assignee:</span>
-            <button className={styles.filterSelect}>All Assignees</button>
+            <select 
+              className={styles.filterSelect}
+              value={assigneeFilter}
+              onChange={(e) => setAssigneeFilter(e.target.value)}
+            >
+              <option value="">All Assignees</option>
+              {usersData?.results?.map((u: any) => (
+                <option key={u.id} value={u.id}>
+                  {u.username} - {u.role || (u.is_staff ? 'Staff' : 'User')}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className={styles.filterRight}>

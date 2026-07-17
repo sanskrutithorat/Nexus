@@ -170,7 +170,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ show, onHide, task })
             ) : (
               usersData?.results?.map((u: any) => (
                 <option key={u.id} value={u.id}>
-                  {u.username} ({u.email})
+                  {u.username} - {u.role || (u.is_staff ? 'Staff' : 'User')}
                 </option>
               ))
             )}

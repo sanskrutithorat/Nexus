@@ -18,5 +18,5 @@ interface GetUsersResponse {
 
 export const getUsers = async (): Promise<GetUsersResponse> => {
   const response = await privateApi.get(API_ENDPOINTS.USER.USERS);
-  return response.data;
+  return response.data.data;
 };
