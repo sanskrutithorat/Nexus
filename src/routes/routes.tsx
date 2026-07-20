@@ -12,7 +12,7 @@ import Customer from "@/features/customer/Customer";
 import Task from "@/features/task/Task";
 import Register from "@/features/register/Register";
 import Members from "@/features/members/Members";
-
+import Roles from "@/features/roles/Roles";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +47,7 @@ export const router = createBrowserRouter([
                             { path: "customer", element: <Customer /> },
                             { path: "task", element: <Task /> },
                             { path: "members", element: <Members /> },
+                            { path: "roles", element: <Roles /> },
 
                         ],
                     },

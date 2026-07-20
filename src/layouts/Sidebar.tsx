@@ -9,7 +9,8 @@ import {
   HiOutlineClipboardDocumentList,
   HiOutlineFolder,
   HiOutlineArrowRightOnRectangle,
-  HiOutlineUserGroup
+  HiOutlineUserGroup,
+  HiOutlineShieldCheck
 } from "react-icons/hi2";
 import Nexuslogo from "@/assets/logo/Background.svg";
 
@@ -75,6 +76,15 @@ const Sidebar = () => {
         >
           <HiOutlineUserGroup size={24} className={styles.icon} />
           <span className={styles.linkText}>Members</span>
+        </NavLink>
+        <NavLink
+          to="/roles"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <HiOutlineShieldCheck size={24} className={styles.icon} />
+          <span className={styles.linkText}>Roles</span>
         </NavLink>
 
 

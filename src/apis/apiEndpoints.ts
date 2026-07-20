@@ -17,5 +17,8 @@ export const API_ENDPOINTS = {
   },
   USER: {
     USERS: "api/users/",
+  },
+  ROLE: {
+    ROLES: "api/roles/",
   }
 } as const;

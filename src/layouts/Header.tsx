@@ -74,7 +74,7 @@ const Header = () => {
           </button> */}
           <Dropdown align="end">
             <Dropdown.Toggle
-              className={`d-flex align-items-center gap-2 bg-white border-0 ${styles.profileTrigger}`}
+              className={`d-flex align-items-center gap-2 border-0 ${styles.profileTrigger}`}
               variant="transparent"
               id="profile-dropdown"
             >

@@ -115,7 +115,10 @@
     gap: 24px;
     // height: calc(100vh - 250px);
     overflow-x: auto;
-    padding-bottom: 12px;
+    // padding-bottom: 12px;
+    background: var(--bg-main);
+    padding: 20px;
+    border-radius: 12px;
 
     // Hide scrollbar for a cleaner look
     &::-webkit-scrollbar {
@@ -307,6 +310,7 @@
 
                 &.deleteBtn {
                     color: $text-red;
+
                     &:hover {
                         background: $bg-red-light;
                     }
