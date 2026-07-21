@@ -1,4 +1,5 @@
-import axios from "axios";
+﻿import axios from "axios";
+import toast from "react-hot-toast";
 
 import { useAuthStore } from "@/store/authStore";
 
@@ -67,6 +68,15 @@ privateApi.interceptors.response.use(
 
         window.location.href =
           "/auth/login";
+      }
+    }
+
+    if (error.response?.data) {
+      const data = error.response.data;
+      if (data.success === false && data.errors?.detail) {
+        toast.error(data.errors.detail);
+      } else if (data.detail && error.response.status !== 401) {
+        toast.error(data.detail);
       }
     }
 

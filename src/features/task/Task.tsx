@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import {
   Plus,
   Clock,
@@ -29,8 +29,8 @@ const Task = () => {
 
   const { data, isLoading } = useGetTasks({ 
     page,
-    project: projectFilter ? Number(projectFilter) : undefined,
-    assigned_to: assigneeFilter ? Number(assigneeFilter) : undefined
+    project: projectFilter ? (projectFilter) : undefined,
+    assigned_to: assigneeFilter ? (assigneeFilter) : undefined
   });
   
   const { data: projectsData } = useGetProjects({ page: 1, page_size: 100 });

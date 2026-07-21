@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import {
     createTask,
     getAllTasks,
@@ -17,7 +17,7 @@ export const useGetTasks = (params?: GetTaskParams) => {
     });
 };
 
-export const useGetTaskDetails = (id: number) => {
+export const useGetTaskDetails = (id: string) => {
     return useQuery({
         queryKey: ["taskDetails", id],
         queryFn: () => getTaskDetails(id),
@@ -40,7 +40,7 @@ export const useUpdateTask = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }: { id: number; data: Partial<Task> }) =>
+        mutationFn: ({ id, data }: { id: string; data: Partial<Task> }) =>
             updateTask(id, data),
         onSuccess: (_, variables) => {
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -53,7 +53,7 @@ export const useDeleteTask = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (id: number) => deleteTask(id),
+        mutationFn: (id: string) => deleteTask(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
         },

@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
   getRoles, 
   createRole, 
@@ -29,7 +29,7 @@ export const useUpdateRole = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }: { id: number; data: Partial<Role> }) => 
+        mutationFn: ({ id, data }: { id: string; data: Partial<Role> }) => 
             updateRole(id, data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["roles"] });
@@ -41,7 +41,7 @@ export const useDeleteRole = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (id: number) => deleteRole(id),
+        mutationFn: (id: string) => deleteRole(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["roles"] });
         },

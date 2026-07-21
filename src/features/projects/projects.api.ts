@@ -1,4 +1,4 @@
-import { privateApi } from "@/apis/privateApi";
+﻿import { privateApi } from "@/apis/privateApi";
 import { API_ENDPOINTS } from "../../apis/apiEndpoints";
 
 export interface GetProjectParams {
@@ -10,7 +10,7 @@ export interface GetProjectParams {
 }
 
 export interface Project {
-  id: number;
+  id: string;
   name: string;
   description: string;
   status: string;
@@ -44,7 +44,7 @@ export const getallProject = async (
   return response.data.data;
 };
 
-export const getProjectDetails = async (id: number): Promise<Project> => {
+export const getProjectDetails = async (id: string): Promise<Project> => {
   const response = await privateApi.get(
     `${API_ENDPOINTS.PROJECT.PROJECTS}${id}/`
   );
@@ -59,7 +59,7 @@ export const createProject = async (data: Partial<Project>): Promise<Project> =>
   return response.data.data;
 };
 
-export const updateProject = async (id: number, data: Partial<Project>): Promise<Project> => {
+export const updateProject = async (id: string, data: Partial<Project>): Promise<Project> => {
   const response = await privateApi.patch(
     `${API_ENDPOINTS.PROJECT.PROJECTS}${id}/`,
     data
@@ -67,7 +67,7 @@ export const updateProject = async (id: number, data: Partial<Project>): Promise
   return response.data.data;
 };
 
-// export const updateCustomer = async (id: number, data: Partial<Customer>): Promise<Customer> => {
+// export const updateCustomer = async (id: string, data: Partial<Customer>): Promise<Customer> => {
 //   const response = await privateApi.patch(
 //     `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`,
 //     data
@@ -75,7 +75,7 @@ export const updateProject = async (id: number, data: Partial<Project>): Promise
 //   return response.data.data;
 // };
 
-// export const deleteCustomer = async (id: number): Promise<void> => {
+// export const deleteCustomer = async (id: string): Promise<void> => {
 //   await privateApi.delete(
 //     `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`
 //   );

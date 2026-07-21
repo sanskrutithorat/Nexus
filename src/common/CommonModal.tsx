@@ -1,4 +1,4 @@
-import { Modal } from "react-bootstrap";
+﻿import { Modal } from "react-bootstrap";
 import styles from "./CommonModal.module.scss";
 import type { ReactNode } from "react";
 

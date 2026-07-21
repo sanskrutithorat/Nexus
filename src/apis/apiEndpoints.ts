@@ -1,4 +1,4 @@
-export const API_ENDPOINTS = {
+﻿export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: "api/auth/login/",
     LOGOUT: "api/auth/logout/",
@@ -20,5 +20,8 @@ export const API_ENDPOINTS = {
   },
   ROLE: {
     ROLES: "api/roles/",
+  },
+  ORGANIZATION: {
+    ORGANIZATIONS: "api/organizations/",
   }
 } as const;

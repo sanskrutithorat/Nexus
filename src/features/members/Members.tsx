@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import CommonTable from "@/common/CommonTable";
 import CommonModal from "@/common/CommonModal";
 import CreateMemberModal from "./CreateMemberModal";
@@ -21,7 +21,7 @@ const Members = () => {
         role: roleFilter ? roleFilter : undefined,
     });
     const { data: rolesData } = useGetRoles();
-    
+
     const deleteUserMutation = useDeleteUser();
 
     const [showModal, setShowModal] = useState(false);
@@ -66,6 +66,7 @@ const Members = () => {
                 const username = row.original.username || "Unknown";
                 const id = row.original.id;
                 const initials = username.split(" ").filter(Boolean).map(n => n[0]).join("").toUpperCase().slice(0, 2);
+                const isSuperadmin = row.original.is_superuser;
 
                 return (
                     <div className={styles.nameContainer}>
@@ -73,7 +74,23 @@ const Members = () => {
                             {initials || "??"}
                         </div>
                         <div className={styles.textContainer}>
-                            <span className={styles.nameText}>{username}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className={styles.nameText}>{username}</span>
+                                {isSuperadmin && (
+                                    <span style={{
+                                        fontSize: "10px",
+                                        background: "rgba(234, 179, 8, 0.15)",
+                                        color: "#eab308",
+                                        padding: "2px 6px",
+                                        borderRadius: "8px",
+                                        fontWeight: 600,
+                                        border: "1px solid rgba(234, 179, 8, 0.3)",
+                                        letterSpacing: "0.5px"
+                                    }}>
+                                        SUPERADMIN
+                                    </span>
+                                )}
+                            </div>
                             <span className={styles.idText}>ID: MEM-{id.toString().padStart(4, '0')}</span>
                         </div>
                     </div>
@@ -83,9 +100,16 @@ const Members = () => {
         {
             accessorKey: "email",
             header: "EMAIL",
-            cell: ({ getValue }) => (
-                <span className={styles.companyText}>{getValue() as string}</span>
-            )
+        },
+        {
+            id: "company",
+            header: "COMPANY",
+            cell: ({ row }) => {
+                const companyName = row.original.organization?.name;
+                return (
+                    <span className={styles.companyText}>{companyName || "N/A"}</span>
+                );
+            }
         },
         {
             accessorKey: "role",
@@ -152,7 +176,7 @@ const Members = () => {
                 <div className={styles.filterLeft}>
                     <div className={styles.filterGroup}>
                         <span className={styles.filterLabel}>Search:</span>
-                        <input 
+                        <input
                             type="text"
                             className={styles.filterSelect}
                             placeholder="Name or Email"
@@ -163,7 +187,7 @@ const Members = () => {
                     </div>
                     <div className={styles.filterGroup}>
                         <span className={styles.filterLabel}>Role:</span>
-                        <select 
+                        <select
                             className={styles.filterSelect}
                             value={roleFilter}
                             onChange={(e) => setRoleFilter(e.target.value)}

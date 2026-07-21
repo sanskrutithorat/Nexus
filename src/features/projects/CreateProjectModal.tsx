@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import CommonModal from '@/common/CommonModal';
 import { useGetCustomers } from '@/hooks/useCustomers';
@@ -73,7 +73,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ show, onHide, p
   const onSubmit = (data: ProjectFormValues) => {
     const payload = {
       ...data,
-      customer: Number(data.customer)
+      customer: (data.customer)
     };
 
     if (project) {

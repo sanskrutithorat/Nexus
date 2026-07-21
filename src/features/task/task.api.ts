@@ -1,4 +1,4 @@
-import { privateApi } from "@/apis/privateApi";
+﻿import { privateApi } from "@/apis/privateApi";
 import { API_ENDPOINTS } from "../../apis/apiEndpoints";
 
 export interface GetTaskParams {
@@ -11,15 +11,15 @@ export interface GetTaskParams {
 }
 
 export interface Task {
-  id: number;
+  id: string;
   title: string;
   description: string;
   status: "todo" | "in_progress" | "completed";
   due_date: string;
-  project: { id: number; name: string } | number | null;
-  assigned_to: { id: number; username?: string; email?: string } | number | null;
-  created_by: { id: number; email?: string } | number | null;
-  organization?: { id: number; name: string } | number | null;
+  project: { id: string; name: string } | number | null;
+  assigned_to: { id: string; username?: string; email?: string } | number | null;
+  created_by: { id: string; email?: string } | number | null;
+  organization?: { id: string; name: string } | number | null;
   created_at: string;
   updated_at: string;
 }
@@ -38,7 +38,7 @@ export const getAllTasks = async (
   return response.data.data;
 };
 
-export const getTaskDetails = async (id: number): Promise<Task> => {
+export const getTaskDetails = async (id: string): Promise<Task> => {
   const response = await privateApi.get(`${API_ENDPOINTS.TASK.TASKS}${id}/`);
   return response.data.data;
 };
@@ -49,7 +49,7 @@ export const createTask = async (data: Partial<Task>): Promise<Task> => {
 };
 
 export const updateTask = async (
-  id: number,
+  id: string,
   data: Partial<Task>
 ): Promise<Task> => {
   const response = await privateApi.patch(
@@ -59,6 +59,6 @@ export const updateTask = async (
   return response.data.data;
 };
 
-export const deleteTask = async (id: number): Promise<void> => {
+export const deleteTask = async (id: string): Promise<void> => {
   await privateApi.delete(`${API_ENDPOINTS.TASK.TASKS}${id}/`);
 };

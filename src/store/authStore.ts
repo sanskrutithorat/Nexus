@@ -1,8 +1,8 @@
-import { create } from "zustand";
+﻿import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface User {
-  id: number;
+  id: string;
   email: string;
   first_name: string;
   last_name: string;

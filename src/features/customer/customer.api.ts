@@ -1,4 +1,4 @@
-import { privateApi } from "@/apis/privateApi";
+﻿import { privateApi } from "@/apis/privateApi";
 import { API_ENDPOINTS } from "../../apis/apiEndpoints";
 
 export interface GetCustomersParams {
@@ -10,7 +10,7 @@ export interface GetCustomersParams {
 }
 
 export interface Customer {
-    id: number;
+    id: string;
     name: string;
     email: string;
     phone: string;
@@ -41,7 +41,7 @@ export const getallCustomer = async (
     return response.data.data;
 };
 
-export const getCustomerDetails = async (id: number): Promise<Customer> => {
+export const getCustomerDetails = async (id: string): Promise<Customer> => {
     const response = await privateApi.get(
         `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`
     );
@@ -56,7 +56,7 @@ export const createCustomer = async (data: Partial<Customer>): Promise<Customer>
     return response.data.data;
 };
 
-export const updateCustomer = async (id: number, data: Partial<Customer>): Promise<Customer> => {
+export const updateCustomer = async (id: string, data: Partial<Customer>): Promise<Customer> => {
     const response = await privateApi.patch(
         `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`,
         data
@@ -64,7 +64,7 @@ export const updateCustomer = async (id: number, data: Partial<Customer>): Promi
     return response.data.data;
 };
 
-export const deleteCustomer = async (id: number): Promise<void> => {
+export const deleteCustomer = async (id: string): Promise<void> => {
     await privateApi.delete(
         `${API_ENDPOINTS.CUSTOMER.CUSTOMERS}${id}/`
     );

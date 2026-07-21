@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import {
 
     createProject,
@@ -17,7 +17,7 @@ export const useGetProjects = (params?: GetProjectParams) => {
     });
 };
 
-export const useGetProjectDetails = (id: number) => {
+export const useGetProjectDetails = (id: string) => {
     return useQuery({
         queryKey: ["projectDetails", id],
         queryFn: () => getProjectDetails(id),
@@ -40,7 +40,7 @@ export const useUpdateProject = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }: { id: number; data: Partial<Project> }) =>
+        mutationFn: ({ id, data }: { id: string; data: Partial<Project> }) =>
             updateProject(id, data),
         onSuccess: (_, variables) => {
             queryClient.invalidateQueries({ queryKey: ["projects"] });
@@ -53,7 +53,7 @@ export const useUpdateProject = () => {
 //     const queryClient = useQueryClient();
 
 //     return useMutation({
-//         mutationFn: ({ id, data }: { id: number; data: Partial<Customer> }) =>
+//         mutationFn: ({ id, data }: { id: string; data: Partial<Customer> }) =>
 //             updateCustomer(id, data),
 //         onSuccess: (_, variables) => {
 //             queryClient.invalidateQueries({ queryKey: ["customers"] });
@@ -66,7 +66,7 @@ export const useUpdateProject = () => {
 //     const queryClient = useQueryClient();
 
 //     return useMutation({
-//         mutationFn: (id: number) => deleteCustomer(id),
+//         mutationFn: (id: string) => deleteCustomer(id),
 //         onSuccess: () => {
 //             queryClient.invalidateQueries({ queryKey: ["customers"] });
 //         },

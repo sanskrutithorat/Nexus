@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import CommonTable from "@/common/CommonTable";
 import CommonModal from "@/common/CommonModal";
 import CreateCustomerModal from "./CreateCustomerModal";
@@ -18,7 +18,7 @@ const Customer = () => {
 
     const { data: customerData, isLoading, isError } = useGetCustomers({
         company_name__icontains: debouncedCompanyName ? debouncedCompanyName : undefined,
-        projects: projectFilter ? Number(projectFilter) : undefined,
+        projects: projectFilter ? (projectFilter) : undefined,
     });
     const { data: projectData } = useGetProjects();
     const deleteCustomerMutation = useDeleteCustomer();

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import CommonModal from '@/common/CommonModal';
 import { useGetProjects } from '@/hooks/useProjects';
@@ -74,11 +74,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ show, onHide, task })
     const { assigned_to, project, ...restData } = data;
     const payload: Partial<Task> = {
       ...restData,
-      project: Number(project),
+      project: (project),
     };
 
     if (assigned_to) {
-      payload.assigned_to = Number(assigned_to);
+      payload.assigned_to = (assigned_to);
     }
 
     if (task) {

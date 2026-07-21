@@ -1,8 +1,8 @@
-import { privateApi } from "@/apis/privateApi";
+﻿import { privateApi } from "@/apis/privateApi";
 import { API_ENDPOINTS } from "@/apis/apiEndpoints";
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
   role?: string;
@@ -36,11 +36,11 @@ export const createUser = async (data: Partial<User>): Promise<User> => {
   return response.data;
 };
 
-export const updateUser = async (id: number, data: Partial<User>): Promise<User> => {
+export const updateUser = async (id: string, data: Partial<User>): Promise<User> => {
   const response = await privateApi.patch(`${API_ENDPOINTS.USER.USERS}${id}/`, data);
   return response.data;
 };
 
-export const deleteUser = async (id: number): Promise<void> => {
+export const deleteUser = async (id: string): Promise<void> => {
   await privateApi.delete(`${API_ENDPOINTS.USER.USERS}${id}/`);
 };

@@ -1,4 +1,4 @@
-import { ExternalLink, Edit2 } from "react-feather";
+﻿import { ExternalLink, Edit2 } from "react-feather";
 import styles from "./ProjectCard.module.scss";
 
 interface ProjectCardProps {

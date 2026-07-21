@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import { 
   getUsers, 
   createUser, 
@@ -31,7 +31,7 @@ export const useUpdateUser = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }: { id: number; data: Partial<User> }) => 
+        mutationFn: ({ id, data }: { id: string; data: Partial<User> }) => 
             updateUser(id, data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -43,7 +43,7 @@ export const useDeleteUser = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (id: number) => deleteUser(id),
+        mutationFn: (id: string) => deleteUser(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
         },

@@ -1,4 +1,4 @@
-import { privateApi } from "@/apis/privateApi";
+﻿import { privateApi } from "@/apis/privateApi";
 import { API_ENDPOINTS } from "../../apis/apiEndpoints";
 import { publicApi } from "../../apis/publicApi";
 
@@ -13,7 +13,7 @@ export interface LoginResponse {
   refresh: string;
 
   user: {
-    id: number;
+    id: string;
     email: string;
     first_name: string;
     last_name: string;

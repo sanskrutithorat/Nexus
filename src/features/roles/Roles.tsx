@@ -73,6 +73,63 @@ const Roles = () => {
             }
         },
         {
+            accessorKey: "permissions",
+            header: "PERMISSIONS",
+            cell: ({ row }) => {
+                const perms = row.original.permissions || {};
+                const keys = Object.keys(perms);
+                if (keys.length === 0) return <span style={{ color: "#64748b", fontSize: "13px", fontStyle: "italic" }}>No specific permissions</span>;
+
+                return (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                        {keys.map(key => {
+                            const actions = perms[key];
+                            if (!actions || actions.length === 0) return null;
+                            
+                            const ACTIONS = ["read", "create", "update", "delete"];
+                            const validActions = Array.isArray(actions) ? actions.filter((v: string) => ACTIONS.includes(v)) : actions;
+                            
+                            const isAll = Array.isArray(validActions) ? validActions.length === 4 : validActions === "all";
+                            const actionText = isAll ? "All Access" : (Array.isArray(validActions) ? validActions.join(", ") : String(validActions));
+                            return (
+                                <div key={key} style={{
+                                    display: "inline-flex",
+                                    alignItems: "stretch",
+                                    background: "rgba(30, 41, 59, 0.4)",
+                                    border: "1px solid rgba(255,255,255,0.05)",
+                                    borderRadius: "6px",
+                                    overflow: "hidden",
+                                    fontSize: "12px",
+                                    boxShadow: "0 1px 2px rgba(0,0,0,0.1)"
+                                }}>
+                                    <span style={{ 
+                                        padding: "4px 8px", 
+                                        background: "rgba(255,255,255,0.05)", 
+                                        color: "#cbd5e1", 
+                                        fontWeight: 600, 
+                                        textTransform: "capitalize",
+                                        display: "flex",
+                                        alignItems: "center"
+                                    }}>
+                                        {key}
+                                    </span>
+                                    <span style={{ 
+                                        padding: "4px 8px", 
+                                        color: isAll ? "#10b981" : "#3b82f6",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        textTransform: isAll ? "none" : "capitalize"
+                                    }}>
+                                        {actionText}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                );
+            }
+        },
+        {
             id: "actions",
             header: "ACTIONS",
             cell: ({ row }) => (
@@ -83,7 +140,6 @@ const Roles = () => {
                     >
                         <Pencil size={18} />
                     </button>
-
                     <button
                         onClick={() => handleDeleteClick(row.original)}
                         className={`${styles.actionBtn} ${styles.deleteBtn}`}
@@ -103,10 +159,10 @@ const Roles = () => {
                     <p className={styles.pageSubtitle}>Manage access control and define roles for your organization members</p>
                 </div>
                 <div className={styles.headerRight}>
-                    <button className={styles.exportBtn}>
+                    {/* <button className={styles.exportBtn}>
                         <Download size={16} />
                         Export CSV
-                    </button>
+                    </button> */}
                     <button className={styles.addBtn} onClick={handleShow}>
                         <Plus size={16} />
                         Add Role

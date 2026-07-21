@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CommonModal from "@/common/CommonModal";
 import { useCreateUser, useUpdateUser } from "@/hooks/useUsers";
@@ -70,7 +70,7 @@ const CreateMemberModal: React.FC<CreateMemberModalProps> = ({ show, onHide, mem
         };
 
         if (data.role_id) {
-            submissionData.role_id = Number(data.role_id);
+            submissionData.role_id = (data.role_id);
         }
 
         if (data.password && data.password.trim() !== "") {

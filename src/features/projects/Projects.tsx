@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { Plus, CreditCard, Activity, CheckCircle, Layers, Clock, Box } from "react-feather";
 import KpiCard from "@/common/KpiCard/KpiCard";
 import styles from "./Projects.module.scss";
@@ -16,7 +16,7 @@ const Projects = () => {
 
   const { data: ProjectData, isLoading, isError } = useGetProjects({
     status: statusFilter || undefined,
-    customer: customerFilter ? Number(customerFilter) : undefined,
+    customer: customerFilter ? (customerFilter) : undefined,
   });
 
   const { data: customersData } = useGetCustomers();
